@@ -28,5 +28,9 @@
     "vite": "^6.0.5",
     "wrangler": "^3.103.2"
   },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
   "packageManager": "pnpm@9.15.4+sha256.9bee59c7313a216722c079c1e22160dea7f88df4e0c3450b1d7b01b882336c6a"
 }
