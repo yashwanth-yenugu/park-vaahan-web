@@ -1,4 +1,4 @@
-import styles from '../styles/Hero.module.css';
+import styles from "../styles/Hero.module.css";
 
 export const Hero = () => {
   return (
@@ -8,8 +8,9 @@ export const Hero = () => {
           Transforming Parking in Urban Communities
         </h1>
         <p className={styles.subtitle}>
-          Connect with nearby apartment complexes and gated communities to secure 
-          your monthly parking space. Say goodbye to daily parking hassles.
+          Connect with nearby apartment complexes and gated communities to
+          secure your monthly parking space. Say goodbye to daily parking
+          hassles.
         </p>
         <div className={styles.cta}>
           <button className={styles.primary}>Find Parking Space</button>

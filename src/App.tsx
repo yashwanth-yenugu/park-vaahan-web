@@ -1,6 +1,6 @@
 import { ComingSoon } from "./components/ComingSoon";
-import styles from "./styles/App.module.css";
 import { Hero } from "./components/Hero";
+import styles from "./styles/App.module.css";
 
 function App() {
   return (
