@@ -1,0 +1,119 @@
+/* CSS for Footer */
+.footer-container {
+    background-color: whitesmoke;
+    padding: 40px 0;
+}
+
+.footer-links h3 {
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.park-para {
+    color: #000000;
+}
+
+.footer-links p a {
+    color: black;
+    font-weight: 400;
+    text-decoration: none !important;
+    font-size: 16px;
+}
+
+.footer-img-para p {
+    color: black;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.all-rights-para {
+    color: black;
+    font-weight: 400;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.contact-button {
+    border: 1px solid #0e5ec1;
+    border-radius: 20px;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+
+.footer-mobile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.footer-mobile .col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.footer-mobile .col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.footer-links a:hover {
+    color: #0e5ec1;
+    text-decoration: underline;
+}
+
+.footer-icons {
+    margin: 5px;
+    padding: 3px 6px;
+    background-color: #FFFFFF80;
+    border-radius: 50%;
+}
+
+.footer-icons i {
+    color: #000000;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .footer-mobile .col-md-3 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .footer-mobile .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    /* Ensure footer links are properly aligned on small screens */
+    .footer-links {
+        margin: 0 !important;
+        padding: 0 !important; /* Reset padding if needed */
+    }
+    .footer-links p {
+        margin-bottom: 10px; /* Ensure spacing between items */
+    }
+}
+
+@media (min-width: 992px) {
+    .icons-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0 !important;
+    }
+}
+
+.footer-icon-container {
+    position: relative;
+    left: -10%;
+}
+
+@media (max-width: 576px) {
+    .footer-icon-container {
+        position: relative;
+        left: 0 !important;
+    }
+}

@@ -1,13 +1,16 @@
-import { ComingSoon } from "./components/ComingSoon";
-import { Hero } from "./components/Hero";
-import styles from "./styles/App.module.css";
+import Footer from "./components/Footer/Footer";
+import Home from "./components/Home/Home";
+
+import Navbar from "./components/Navbar/Navbar";
+
+
 
 function App() {
   return (
     <>
-      <h1 className={styles.title}>Park Vaahan</h1>
-      <Hero />
-      <ComingSoon />
+    <Navbar></Navbar>
+      <Home></Home>
+      <Footer></Footer>
     </>
   );
 }
