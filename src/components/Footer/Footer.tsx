@@ -12,7 +12,7 @@ const Footer = () => {
                   <div className="col-12 col-md-3">
                     <div className="footer-img-para">
                       <a className="navbar-brand" href="#">
-                        <img className="parkvahan-logo" src="public/parkvahan-logo.png"/>
+                        <img className="parkvahan-logo" src="parkvahan-logo.png"/>
                       </a>
                       <p className="mt-2 d-none d-lg-block park-para">Transforming Parking in Urban Communities. Connect with nearby apartment complexes and gated communities to secure your monthly parking space. Say goodbye to daily parking hassles.</p>
                     </div>

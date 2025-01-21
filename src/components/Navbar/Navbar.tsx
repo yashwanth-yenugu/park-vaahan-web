@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <nav className='nav'>
       <div className="container">
-        <img className="parkvahan-logo" src="public/parkvahan-logo.png"/>
+        <img className="parkvahan-logo" src="parkvahan-logo.png"/>
         <button className="book-appointment" type="submit">
           <span>Book Appointment</span>
           </button>
