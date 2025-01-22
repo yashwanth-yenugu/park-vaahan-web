@@ -10,12 +10,12 @@ const Home = () => {
 
   const [isListingParking, setIsListingParking] = useState(false); // New state to toggle views
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     console.log('Form Data:', formData);
     alert('Form submitted successfully!');
