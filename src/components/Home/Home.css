@@ -6,6 +6,11 @@
     text-align: center;
   }
   .parking-spaces{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
      h1{
       color: #80b7f2;
       font-size: 3rem;
@@ -23,6 +28,10 @@
   }
   
   .card {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    margin-left: 30px;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -78,6 +87,7 @@
     background-color: #0056b3;
   }
   .click-button{
+   
     background-color: #80b7f2;
     color: white;
     font-weight: bold;
@@ -85,6 +95,7 @@
     width: 50%;
     border: none;
     border-radius: 10px;
+    margin-left: 13px;
   }
 
 .parking-space {
@@ -123,6 +134,25 @@
    font-size: 1.8rem !important;
   }
 }
+.ParkingSpaces{
+  height: 30vh;
+  h1{
+    font-size: 1.5rem;
+  }
+
+}
+.button1{
+  padding: 5px 10px !important;
+  margin-right: 0px !important;
+
+}
+.button2{
+  margin-top: 10px;
+  padding: 5px 10px !important;
+  
+  
+}
+
 }
 
 .parking-app {
@@ -242,3 +272,105 @@
     color: #555;
   }
 }
+.testimonials-container {
+  text-align: center;
+  padding: 20px;
+  overflow: hidden; /* Hides overflow for a clean look */
+  position: relative;
+}
+
+.testimonials-auto-scroll {
+  display: flex;
+  animation: scroll 20s linear infinite; /* Smooth auto-scroll effect */
+}
+
+.testimonial-card {
+  flex: 0 0 250px; /* Fixed card width */
+  margin: 0 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.testimonial-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.testimonial-rating {
+  color: #ffa500;
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.testimonial-review {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Keyframes for infinite scrolling */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%); /* Scroll the entire width */
+  }
+}
+
+.section-5 {
+  text-align: center; 
+  /* background-color: #80b7f2; */
+}
+.ParkingSpaces{
+  h1{
+    color: #80b7f2;
+  }
+  p{
+    color: #555;
+  }
+}
+.section-5 .container {
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+  min-height: 70vh; 
+  
+}
+
+.section-5 .row {
+  text-align: center;
+}
+.button1{
+  background-color: #007bff; /* Primary button color (e.g., blue) */
+  color: #fff; 
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.button1:hover {
+  background-color: #0069d9; 
+}
+
+.button2{ 
+  background-color: #ccc; 
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button2:hover{
+  background-color: #bbb; 
+}
+
+

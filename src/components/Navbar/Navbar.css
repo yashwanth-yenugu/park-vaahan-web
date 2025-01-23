@@ -8,17 +8,49 @@
     align-items: center;
     padding: 20px;
   }
-  
+  .logo-container{
+    display: flex;
+    h1{
+      color: #01A1FF;
+    }
+  }
   .parkvahan-logo {
     height: 50px; 
     width: auto;
   }
   
-  .book-appointment{
+  .call-appointment{
     color: #ffffff;
     padding: 0.6rem 2rem;
-    background: linear-gradient(90deg, #00C6FF 0%, #01A1FF 100%),
-    linear-gradient(0deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25));
+    background:#01A1FF;
     border-radius: 0.3rem;
     border: none;
   }
+  .phone-number-link {
+    font-size: 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+@media (max-width: 768px){
+  .logo-container{
+    /* display: flex; */
+    h1{
+      display: none;
+    }
+  }
+  .call-appointment{
+    color: #ffffff;
+    padding: 0.3rem 1rem;
+    background:#01A1FF;
+    border-radius: 0.3rem;
+    border: none;
+  }
+  .phone-number-link {
+    font-size: 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    /* font-weight: bold; */
+  }
+
+}

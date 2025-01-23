@@ -14,7 +14,12 @@ const Footer = () => {
                       <a className="navbar-brand" href="#">
                         <img className="parkvahan-logo" src="parkvahan-logo.png"/>
                       </a>
-                      <p className="mt-2 d-none d-lg-block park-para">Transforming Parking in Urban Communities. Connect with nearby apartment complexes and gated communities to secure your monthly parking space. Say goodbye to daily parking hassles.</p>
+                      <div className="footer-links mt-3">
+                      <h3>Get in Touch</h3>
+                      <p><a href="mailto:support@yourapp.com">support@yourapp.com</a></p>
+                      <p><a href="tel:+911234567890">+91 123 456 7890</a></p>
+                      <p>123 Main St, Hyderabad, India</p>
+                    </div>
                     </div>
                   </div>
 

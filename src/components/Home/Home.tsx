@@ -26,11 +26,38 @@ const Home = () => {
   const toggleView = () => {
     setIsListingParking(!isListingParking); // Toggle between views
   };
+  const testimonials = [
+    {
+      image: "https://via.placeholder.com/150",
+      name: "John Doe",
+      rating: 5,
+      review: "This service exceeded my expectations! Highly recommend.",
+    },
+    {
+      image: "https://via.placeholder.com/150",
+      name: "Jane Smith",
+      rating: 4,
+      review: "Great experience and very professional!",
+    },
+    {
+      image: "https://via.placeholder.com/150",
+      name: "Sam Wilson",
+      rating: 5,
+      review: "Top-notch service with excellent results!",
+    },
+    {
+      image: "https://via.placeholder.com/150",
+      name: "Lisa Brown",
+      rating: 4,
+      review: "Professional and reliable! Will use again.",
+    },
+  ];
 
   return (
     <>
       <section className="section-1 mt-3">
-        <div className='container row'>
+        <div className='container'>
+          <div className='row'>
           <div className='parking-spaces col-md-6 col-12'>
             <h1>Find Nearby Parking Spaces <br /> When You Need Them</h1>
             <p>Book secure, affordable parking in nearby apartments or gated communities. No more searching for parking—just park and go!</p>
@@ -90,12 +117,13 @@ const Home = () => {
             </div>
             
           </div>
+          </div>
         </div>
 
       </section>
-      <div>
+      {/* <div>
     <img className='parking-space' src="parking-space.png" alt="Parking Space" />
-  </div>
+  </div> */}
       <section className="section-2">
         <div className='container'>
         <div className='row'>
@@ -169,7 +197,7 @@ const Home = () => {
 
           </div>
           <div className='col-md-6 col-12 row'>
-          <h3 className='for-users'>For Parkers (Users):</h3>
+          <h3 className='for-users'>For Space Owners</h3>
           <div className="content-box">
             <div className='search-near'>
               <h6>Affordable</h6> 
@@ -201,69 +229,50 @@ const Home = () => {
           </div>
           </div>
         </div>
-      {/* <div className="how-it-works"> */}
       
 
-      {/* <div className="content-section">
+      
         
-        <div className="content-box">
-          <h3>For Parkers (Users):</h3>
-          <ol className="steps">
-            <li>
-              <strong>Search Nearby:</strong> Use the app to find available parking spaces in apartments or gated communities near you.
-            </li>
-            <li>
-              <strong>Book:</strong> Select a space that fits your needs and book it for a monthly fee.
-            </li>
-            <li>
-              <strong>Park:</strong> Enjoy guaranteed, secure parking without the hassle of street parking.
-            </li>
-          </ol>
-        </div>
-
-      
-        <div className="content-box">
-          <h3>For Space Owners:</h3>
-          <ol className="steps">
-            <li>
-              <strong>List Your Space:</strong> Post available parking spaces in your community.
-            </li>
-            <li>
-              <strong>Set Your Price:</strong> Choose the monthly rental price for your space.
-            </li>
-            <li>
-              <strong>Earn Income:</strong> Start earning passive income as others book your space.
-            </li>
-          </ol>
-        </div>
-      </div> */}
-    {/* </div> */}
+       
       </section>
-      <section className="section-4"></section>
+      <section className="section-4">
+      <div className="testimonials-container">
+      <h2>What Our Users Are Saying</h2>
+      <div className="testimonials-auto-scroll">
+        {/* Duplicate testimonials for seamless looping */}
+        {[...testimonials, ...testimonials].map((testimonial, index) => (
+          <div className="testimonial-card" key={index}>
+            <img
+              src={testimonial.image}
+              alt={`${testimonial.name}'s avatar`}
+              className="testimonial-image"
+            />
+            <h3>{testimonial.name}</h3>
+            <p className="testimonial-rating">
+              {"⭐".repeat(testimonial.rating)}
+            </p>
+            <p className="testimonial-review">{testimonial.review}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+      </section>
+      <section className="section-5">
+        <div className='container'>
+          <div className='row'>
+          <div className='ParkingSpaces'>
+            <h1>Find Nearby Parking Spaces When You Need Them</h1>
+            <p>Book secure, affordable parking in nearby apartments or gated communities. No more searching for parking—just park and go!</p>
+            <div>
+              <button className='button1'>I’m Looking for Parking</button>
+              <button className='button2'>I Want to List Parking Spaces</button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
 
 export default Home;
-{/* <div className='parking-app'>
-<h1 >Your Convenient Solution <br/>for Finding Parking</h1>
-<p>
-Whether you’re struggling to find parking in a busy area or need a long-term spot near your home, our app connects you with available spaces in nearby apartments or gated communities. Forget the hassle of street parking—book your monthly parking spot easily and securely today.
-</p>
-</div>
-<div className="feature-list content-1 ">
-  <h3>For Parkers (Users):</h3>
-  <ul>
-    <li>Search for available parking spaces in nearby apartments or gated communities.</li>
-    <li>Book monthly parking at affordable rates with secure payment options.</li>
-    <li>Find parking close to your home, saving time and avoiding the stress of street parking.</li>
-  </ul>
-</div>
-<div className="feature-list content-1 ">
-  <h3>For Space Owners:</h3>
-  <ul>
-    <li>List available parking spaces in your apartment or gated community.</li>
-    <li>Set your pricing and availability to earn passive income.</li>
-    <li>Manage and monitor bookings effortlessly.</li>
-  </ul>
-</div> */}
