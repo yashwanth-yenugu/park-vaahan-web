@@ -1,0 +1,12 @@
+{
+  "atDirectives": [
+    {
+      "name": "@tailwind",
+      "description": "Use the @tailwind directive to insert Tailwind's base, components, utilities and variants styles into your CSS."
+    },
+    {
+      "name": "@apply",
+      "description": "Use the @apply directive to apply a class."
+    }
+  ]
+}
