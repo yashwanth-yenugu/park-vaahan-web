@@ -3,5 +3,7 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
-  "typescript.updateImportsOnFileMove.enabled": "always"
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  "css.customData": [".vscode/tailwind.json"]
 }

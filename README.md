@@ -6,6 +6,8 @@ A web application built with React, TypeScript, and Vite.
 
 - React + TypeScript
 - Vite
+- Tailwind CSS
+- shadcn/ui Components
 - Cloudflare Workers
 
 ## Prerequisites
@@ -28,4 +30,12 @@ pnpm install    # Install dependencies
 pnpm dev        # Start development server
 pnpm build      # Build for production
 pnpm lint       # Run ESLint
+```
+
+## UI Components
+
+This project uses [shadcn/ui](https://ui.shadcn.com/) for beautifully designed components built with Radix UI and Tailwind CSS. Components can be added using:
+
+```bash
+pnpm dlx shadcn@latest add [component-name]
 ```
