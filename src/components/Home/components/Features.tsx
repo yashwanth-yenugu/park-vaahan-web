@@ -79,7 +79,7 @@ const Features = () => {
               />
               <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10">
                 <p className="text-sm font-medium text-white">
-                  Trusted by 10,000+ users
+                  Trusted by 100+ users
                 </p>
               </div>
             </div>
