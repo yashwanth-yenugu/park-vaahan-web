@@ -12,26 +12,26 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     image: "user1.jpg",
-    name: "Ravi Kumar",
+    name: "Yashwanth Reddy",
     role: "Daily Commuter",
     rating: 5,
     review:
       "I used to spend so much time looking for parking every day. This app made it so easy to find a spot near my home, and I don't have to worry anymore!",
   },
   {
-    image: "user2.jpg",
-    name: "Neha Singh",
-    role: "Space Owner",
-    rating: 4,
-    review:
-      "Listing my parking space has been a great way to earn extra money every month, and it's been super easy to manage",
-  },
-  {
     image: "user3.jpg",
-    name: "Mahi Patel",
-    role: "Business Owner",
+    name: "Pooja Shetty",
+    role: "Daily Commuter",
     rating: 5,
     review: "Secure and convenient parking options. Love it!",
+  },
+  {
+    image: "user2.jpg",
+    name: "Vijay Kumar",
+    role: "Apartment Complex Manager",
+    rating: 5,
+    review:
+      "Listing my parking space has been a great way to earn extra money every month, and it's been super easy to manage",
   },
 ];
 
