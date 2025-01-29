@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const ParkingForm = () => {
-  const [_showForm, setShowForm] = useState<"find" | "list" | null>(null);
+  const [, setShowForm] = useState<"find" | "list" | null>(null);
 
   return (
     <div className="flex flex-col space-y-4 w-full max-w-sm mx-auto">
