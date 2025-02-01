@@ -26,6 +26,17 @@ export default function TextToImagePage() {
   const multipleFilesInputRef = useRef<HTMLInputElement>(null);
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
+  const [imageToEncode, setImageToEncode] = useState<File | null>(null);
+  const imageToEncodeRef = useRef<HTMLInputElement>(null);
+  const [decodedImage, setDecodedImage] = useState<string | null>(null);
+  const decodedImageRef = useRef<HTMLImageElement>(null);
+  const decodeImageInputRef = useRef<HTMLInputElement>(null);
+  const [binaryText, setBinaryText] = useState<string>("");
+  const imageToBinaryRef = useRef<HTMLInputElement>(null);
+  const [binaryToImageResult, setBinaryToImageResult] = useState<string | null>(
+    null
+  );
+  const binaryTextInputRef = useRef<HTMLTextAreaElement>(null);
 
   // Load FFmpeg
   useEffect(() => {
@@ -185,30 +196,28 @@ export default function TextToImagePage() {
 
       const outputFile = `output.${selectedFormat.value}`;
 
-      // Create video from images with format-specific settings
+      // Create slideshow video from images
       const ffmpegArgs = [
         "-framerate",
-        "1",
+        "1", // 1 frame per second
         "-pattern_type",
         "sequence",
         "-i",
         "image%04d.png",
       ];
 
-      // Add format-specific encoding settings for high quality
+      // Add format-specific encoding settings
       switch (selectedFormat.value) {
         case "3gp":
           ffmpegArgs.push(
             "-c:v",
-            "h263",
+            "mpeg4",
             "-b:v",
-            "4M", // Higher bitrate
-            "-maxrate",
-            "4M",
-            "-bufsize",
-            "8M",
+            "1M",
             "-r",
-            "15" // Keep framerate for compatibility
+            "1",
+            "-movflags",
+            "+faststart"
           );
           break;
         case "avi":
@@ -216,49 +225,31 @@ export default function TextToImagePage() {
             "-c:v",
             "libx264",
             "-preset",
-            "veryslow", // Highest quality encoding
+            "medium",
             "-crf",
-            "0", // Lossless quality
-            "-qp",
-            "0" // Best quality
+            "23",
+            "-r",
+            "1"
           );
           break;
         case "flv":
-          ffmpegArgs.push(
-            "-c:v",
-            "flv",
-            "-qscale:v",
-            "1", // Highest quality (1-31, lower is better)
-            "-b:v",
-            "8M" // High bitrate
-          );
+          ffmpegArgs.push("-c:v", "flv", "-qscale:v", "3", "-r", "1");
           break;
         case "mov":
-          ffmpegArgs.push(
-            "-c:v",
-            "prores_ks",
-            "-profile:v",
-            "4", // ProRes 4444 (highest quality)
-            "-qscale:v",
-            "1",
-            "-vendor",
-            "apl0",
-            "-bits_per_mb",
-            "8000" // High bitrate per macroblock
-          );
+          ffmpegArgs.push("-c:v", "prores_ks", "-profile:v", "3", "-r", "1");
           break;
         case "m4v":
           ffmpegArgs.push(
             "-c:v",
             "libx264",
             "-preset",
-            "veryslow", // Highest quality encoding
+            "medium",
             "-crf",
-            "0", // Lossless quality
-            "-qp",
-            "0", // Best quality
+            "23",
+            "-r",
+            "1",
             "-pix_fmt",
-            "yuv444p" // 4:4:4 chroma subsampling
+            "yuv420p"
           );
           break;
       }
@@ -367,6 +358,257 @@ export default function TextToImagePage() {
     }
   }, [ffmpeg, isLoaded, videoFile]);
 
+  const handleImageToEncode = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      setImageToEncode(file);
+      const img = new Image();
+      img.onload = () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        // Draw image to temporary canvas to get pixel data
+        const tempCanvas = document.createElement("canvas");
+        const tempCtx = tempCanvas.getContext("2d");
+        if (!tempCtx) return;
+
+        tempCanvas.width = img.width;
+        tempCanvas.height = img.height;
+        tempCtx.drawImage(img, 0, 0);
+
+        const imageData = tempCtx.getImageData(0, 0, img.width, img.height);
+        const data = imageData.data;
+
+        // Convert pixel data to binary string
+        let binaryString = "";
+        for (let i = 0; i < data.length; i += 4) {
+          // Convert RGB values to binary
+          binaryString += data[i].toString(2).padStart(8, "0"); // R
+          binaryString += data[i + 1].toString(2).padStart(8, "0"); // G
+          binaryString += data[i + 2].toString(2).padStart(8, "0"); // B
+        }
+
+        // Calculate dimensions for output image
+        const size = Math.ceil(Math.sqrt(binaryString.length));
+        canvas.width = size;
+        canvas.height = size;
+
+        // Create output image
+        const outputImageData = ctx.createImageData(size, size);
+        const outputData = outputImageData.data;
+
+        // Fill image data
+        for (let i = 0; i < binaryString.length; i++) {
+          const value = binaryString[i] === "1" ? 255 : 0;
+          const index = i * 4;
+          outputData[index] = value; // R
+          outputData[index + 1] = value; // G
+          outputData[index + 2] = value; // B
+          outputData[index + 3] = 255; // A
+        }
+
+        ctx.putImageData(outputImageData, 0, 0);
+      };
+
+      img.src = URL.createObjectURL(file);
+    },
+    []
+  );
+
+  const handleImageDecode = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+
+        // Convert binary image back to RGB values
+        let binaryString = "";
+        for (let i = 0; i < data.length; i += 4) {
+          binaryString += data[i] > 127 ? "1" : "0";
+        }
+
+        // Convert binary string back to RGB values
+        const rgbValues = [];
+        for (let i = 0; i < binaryString.length; i += 24) {
+          const rgbBinary = binaryString.slice(i, i + 24);
+          if (rgbBinary.length === 24) {
+            const r = parseInt(rgbBinary.slice(0, 8), 2);
+            const g = parseInt(rgbBinary.slice(8, 16), 2);
+            const b = parseInt(rgbBinary.slice(16, 24), 2);
+            rgbValues.push([r, g, b]);
+          }
+        }
+
+        // Calculate dimensions for the output image
+        const pixelCount = rgbValues.length;
+        const size = Math.ceil(Math.sqrt(pixelCount));
+
+        // Create output image
+        const outputCanvas = document.createElement("canvas");
+        const outputCtx = outputCanvas.getContext("2d");
+        if (!outputCtx) return;
+
+        outputCanvas.width = size;
+        outputCanvas.height = size;
+        const outputImageData = outputCtx.createImageData(size, size);
+        const outputData = outputImageData.data;
+
+        // Fill output image data
+        for (let i = 0; i < rgbValues.length; i++) {
+          const [r, g, b] = rgbValues[i];
+          const index = i * 4;
+          outputData[index] = r; // R
+          outputData[index + 1] = g; // G
+          outputData[index + 2] = b; // B
+          outputData[index + 3] = 255; // A
+        }
+
+        outputCtx.putImageData(outputImageData, 0, 0);
+        setDecodedImage(outputCanvas.toDataURL());
+      };
+
+      img.src = URL.createObjectURL(file);
+    },
+    []
+  );
+
+  const downloadDecodedImage = useCallback(() => {
+    if (!decodedImage) return;
+
+    const link = document.createElement("a");
+    link.href = decodedImage;
+    link.download = "decoded-image.png";
+    link.click();
+  }, [decodedImage]);
+
+  const handleImageToBinary = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+
+        // Convert pixel data to binary string
+        let binaryString = "";
+        for (let i = 0; i < data.length; i += 4) {
+          // Convert RGB values to binary
+          const r = data[i].toString(2).padStart(8, "0");
+          const g = data[i + 1].toString(2).padStart(8, "0");
+          const b = data[i + 2].toString(2).padStart(8, "0");
+          binaryString += `${r}${g}${b}\n`; // Add newline for readability
+        }
+
+        setBinaryText(binaryString);
+      };
+
+      img.src = URL.createObjectURL(file);
+    },
+    []
+  );
+
+  const downloadBinaryText = useCallback(() => {
+    if (!binaryText) return;
+
+    const blob = new Blob([binaryText], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "image-binary.txt";
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [binaryText]);
+
+  const handleBinaryToImage = useCallback(() => {
+    const binaryInput = binaryTextInputRef.current?.value;
+    if (!binaryInput) return;
+
+    try {
+      // Split binary string into RGB values
+      const rgbBinaries = binaryInput.trim().split("\n");
+      const rgbValues = rgbBinaries
+        .filter((bin) => bin.length === 24) // Ensure valid RGB binary (8+8+8 bits)
+        .map((rgbBinary) => {
+          const r = parseInt(rgbBinary.slice(0, 8), 2);
+          const g = parseInt(rgbBinary.slice(8, 16), 2);
+          const b = parseInt(rgbBinary.slice(16, 24), 2);
+          return [r, g, b];
+        });
+
+      if (rgbValues.length === 0) {
+        throw new Error("No valid RGB values found in binary text");
+      }
+
+      // Calculate dimensions for the output image
+      const pixelCount = rgbValues.length;
+      const size = Math.ceil(Math.sqrt(pixelCount));
+
+      // Create canvas and context
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      canvas.width = size;
+      canvas.height = size;
+      const imageData = ctx.createImageData(size, size);
+      const data = imageData.data;
+
+      // Fill image data
+      for (let i = 0; i < rgbValues.length; i++) {
+        const [r, g, b] = rgbValues[i];
+        const index = i * 4;
+        data[index] = r; // R
+        data[index + 1] = g; // G
+        data[index + 2] = b; // B
+        data[index + 3] = 255; // A
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+      setBinaryToImageResult(canvas.toDataURL());
+    } catch (error) {
+      console.error("Error converting binary to image:", error);
+      alert(
+        "Error converting binary to image. Please check the binary format."
+      );
+    }
+  }, []);
+
+  const downloadBinaryToImage = useCallback(() => {
+    if (!binaryToImageResult) return;
+
+    const link = document.createElement("a");
+    link.href = binaryToImageResult;
+    link.download = "binary-to-image.png";
+    link.click();
+  }, [binaryToImageResult]);
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
       <div className="max-w-2xl w-full space-y-8 p-8 bg-white rounded-lg shadow-lg">
@@ -407,6 +649,39 @@ export default function TextToImagePage() {
                 Download Image
               </Button>
             </div>
+          </div>
+
+          {/* Encode Image Section */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Encode Image</h3>
+            <div className="flex gap-4">
+              <input
+                type="file"
+                ref={imageToEncodeRef}
+                onChange={handleImageToEncode}
+                accept="image/*"
+                className="hidden"
+              />
+              <Button
+                onClick={() => imageToEncodeRef.current?.click()}
+                className="flex-1"
+              >
+                Select Image to Encode
+              </Button>
+              <Button
+                onClick={downloadImage}
+                variant="outline"
+                className="flex-1"
+                disabled={!imageToEncode}
+              >
+                Download Encoded Image
+              </Button>
+            </div>
+            {imageToEncode && (
+              <p className="text-sm text-gray-600">
+                Selected image: {imageToEncode.name}
+              </p>
+            )}
           </div>
 
           <div className="relative">
@@ -572,6 +847,131 @@ export default function TextToImagePage() {
                 </Button>
               </div>
             )}
+
+            {/* Decode Image to Original */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">
+                Decode to Original Image
+              </h3>
+              <div className="flex gap-4">
+                <input
+                  type="file"
+                  ref={decodeImageInputRef}
+                  onChange={handleImageDecode}
+                  accept="image/png"
+                  className="hidden"
+                />
+                <Button
+                  onClick={() => decodeImageInputRef.current?.click()}
+                  variant="outline"
+                  className="flex-1"
+                >
+                  Upload Encoded Image
+                </Button>
+                <Button
+                  onClick={downloadDecodedImage}
+                  variant="outline"
+                  className="flex-1"
+                  disabled={!decodedImage}
+                >
+                  Download Original Image
+                </Button>
+              </div>
+              {decodedImage && (
+                <div className="mt-4">
+                  <p className="text-sm text-gray-600 mb-2">
+                    Decoded Image Preview:
+                  </p>
+                  <div className="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                    <img
+                      ref={decodedImageRef}
+                      src={decodedImage}
+                      alt="Decoded"
+                      className="max-w-full h-auto"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Image to Binary Text */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Convert Image to Binary</h3>
+              <div className="flex gap-4">
+                <input
+                  type="file"
+                  ref={imageToBinaryRef}
+                  onChange={handleImageToBinary}
+                  accept="image/*"
+                  className="hidden"
+                />
+                <Button
+                  onClick={() => imageToBinaryRef.current?.click()}
+                  variant="outline"
+                  className="flex-1"
+                >
+                  Select Image
+                </Button>
+                <Button
+                  onClick={downloadBinaryText}
+                  variant="outline"
+                  className="flex-1"
+                  disabled={!binaryText}
+                >
+                  Download Binary Text
+                </Button>
+              </div>
+              {binaryText && (
+                <div className="mt-4">
+                  <p className="text-sm text-gray-600 mb-2">
+                    Binary Preview (first 1000 characters):
+                  </p>
+                  <div className="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                    <pre className="text-xs overflow-auto max-h-40 font-mono">
+                      {binaryText.slice(0, 1000)}
+                      {binaryText.length > 1000 && "..."}
+                    </pre>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Binary Text to Image */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Convert Binary to Image</h3>
+              <textarea
+                ref={binaryTextInputRef}
+                className="w-full h-32 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary font-mono text-xs"
+                placeholder="Paste binary text here (format: RRRRRRRRGGGGGGGGBBBBBBBB, one pixel per line)..."
+              />
+              <div className="flex gap-4">
+                <Button onClick={handleBinaryToImage} className="flex-1">
+                  Convert to Image
+                </Button>
+                <Button
+                  onClick={downloadBinaryToImage}
+                  variant="outline"
+                  className="flex-1"
+                  disabled={!binaryToImageResult}
+                >
+                  Download Image
+                </Button>
+              </div>
+              {binaryToImageResult && (
+                <div className="mt-4">
+                  <p className="text-sm text-gray-600 mb-2">
+                    Converted Image Preview:
+                  </p>
+                  <div className="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                    <img
+                      src={binaryToImageResult}
+                      alt="Converted from binary"
+                      className="max-w-full h-auto"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
