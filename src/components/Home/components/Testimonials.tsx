@@ -20,14 +20,14 @@ const testimonials: Testimonial[] = [
   },
   {
     image: "user3.jpg",
-    name: "Pooja Shetty",
+    name: "Neha Negi",
     role: "Daily Commuter",
     rating: 5,
     review: "Secure and convenient parking options. Love it!",
   },
   {
     image: "user2.jpg",
-    name: "Vijay Kumar",
+    name: "Dheeraj Shetty",
     role: "Apartment Complex Manager",
     rating: 5,
     review:

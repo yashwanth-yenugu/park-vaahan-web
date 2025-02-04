@@ -3,5 +3,5 @@ export const CONTACT_INFO = {
   phoneRaw: "+917899656711", // Without spaces for tel: links
   email: "connect@parkvaahan.in",
   location: "Bangalore, India",
-  companyName: "ParkVahan",
-} as const; 
+  companyName: "ParkVaahan",
+} as const;
