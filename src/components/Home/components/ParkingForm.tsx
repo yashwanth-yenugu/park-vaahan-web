@@ -19,6 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import * as z from "zod";
 
 const formSchema = z.object({
@@ -43,6 +44,8 @@ const formSchema = z.object({
 
 const ParkingForm = () => {
   const [isExpanded, setIsExpanded] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -62,8 +65,39 @@ const ParkingForm = () => {
     onChange(digitsOnly);
   };
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log("Form submitted:", values);
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
+    try {
+      // Use the correct API URL based on environment
+      const apiUrl = import.meta.env.DEV
+        ? "http://localhost:8788/api/submit-form" // Development
+        : "/api/submit-form"; // Production
+
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Something went wrong");
+      }
+
+      // Handle success
+      toast.success("Form submitted successfully!");
+      form.reset();
+    } catch (error) {
+      console.error("Form submission error:", error);
+      toast.error(
+        error instanceof Error ? error.message : "Failed to submit form"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -205,8 +239,9 @@ const ParkingForm = () => {
                 <Button
                   type="submit"
                   className="w-full bg-[#04AA6D] hover:bg-[#038857] text-white font-medium transition-colors duration-200"
+                  disabled={isSubmitting}
                 >
-                  Get in Touch
+                  {isSubmitting ? "Submitting..." : "Get in Touch"}
                 </Button>
               </form>
             </Form>

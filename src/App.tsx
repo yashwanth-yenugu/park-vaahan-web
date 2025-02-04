@@ -1,10 +1,10 @@
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import LandingPage from "./components/Home/Home";
-import { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-
 
 function App() {
   useEffect(() => {
@@ -15,7 +15,7 @@ function App() {
   }, []);
   return (
     <>
-
+      <Toaster position="top-center" />
       <div>
         <Header></Header>
         <LandingPage></LandingPage>

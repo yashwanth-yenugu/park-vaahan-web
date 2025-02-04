@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "eslint . && tsc -b && vite build",
-    "lint": "eslint ."
+    "build": "eslint \"src/**/*.{ts,tsx}\" \"functions/**/*.ts\" && tsc -b && vite build",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" \"functions/**/*.ts\"",
+    "dev:functions": "wrangler dev",
+    "pages:dev": "pnpm build && concurrently \"vite --port 5173\" \"wrangler pages dev ./dist --port 8788\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -23,6 +25,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.2",
+    "react-hot-toast": "^2.5.1",
     "simple-icons": "^14.4.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
@@ -37,6 +40,7 @@
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
     "eslint": "^9.17.0",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.0.0",
