@@ -1,53 +1,20 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { useState } from 'react';
+
 import { GoDotFill } from "react-icons/go";
 import { IoMdPerson } from "react-icons/io";
 import { CiMemoPad} from "react-icons/ci";
-import { FaStar } from "react-icons/fa6";
+import { FaRegCheckCircle } from "react-icons/fa";
+import ParkingForm from "./ParkingForm";
+import Testimonials from "./Testimonials";
 
 const Home = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    contact: '',
-    area: ''
-  });
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log('Form Data:', formData);
-    alert('Form submitted successfully!');
-    setFormData({ name: '', contact: '', area: '' });
-  };
-  const testimonials = [
-    {
-      image: "dummy-image.jpg",
-      name: "Ravi",
-      rating: 5,
-      review: "I used to spend so much time looking for parking every day. This app made it so easy to find a spot near my home, and I don’t have to worry anymore!"
-    },
-    {
-      image: "dummy-image.jpg",
-      name: "Neha",
-      rating: 4,
-      review: "Listing my parking space has been a great way to earn extra money every month, and it’s been super easy to manage"
-    },
-    {
-      image: "dummy-image.jpg",
-      name: "Mahi",
-      rating: 5,
-      review: "Secure and convenient parking options. Love it!"
-    }
-  ];
+
 
   return (
     <div className="bg-gradient-to-r from-indigo-900 to-purple-700 py-4">
       <section className="section-1 pt-16 md:py-8">
-        <div className="max-w-7xl mx-auto px-4 mt-20">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div data-aos="fade-up" className="w-full flex flex-col justify-center md:h-[75vh] text-center md:text-left">
             <h1 className="text-[#80b7f2] text-2xl md:text-6xl font-bold ">
@@ -58,143 +25,8 @@ const Home = () => {
               No more searching for parking— just park and go!
               </p>
               </div>
-          <div className="p-4 w-full flex flex-col justify-center" >
-          <Accordion type="single" collapsible  className="flex flex-col items-center">
-  <AccordionItem value="item-1" className="border-none md:w-3/4 w-full">
-    <AccordionTrigger data-aos="fade-up" className="w-full md:w-1/2 border border-white text-white hover:bg-white hover:text-indigo-900  py-2 px-4 p-4 text-xl rounded-lg hover:no-underline no-underline mb-5">
-    I’m Looking for Parking
-    </AccordionTrigger>
-    <AccordionContent className="no-underline">
-      <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200 w-full">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="form-group flex flex-col">
-            <label htmlFor="name" className="text-gray-700 text-left font-semibold mb-1">
-              Name:
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter your name"
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          <div className="form-group flex flex-col">
-            <label htmlFor="contact" className="text-gray-700 text-left font-semibold mb-1">
-              Phone Number:
-            </label>
-            <input
-              type="text"
-              id="contact"
-              name="contact"
-              value={formData.contact}
-              onChange={handleChange}
-              placeholder="Enter your contact details"
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          <div className="form-group flex flex-col">
-  <label htmlFor="area" className="text-gray-700 text-left font-semibold mb-1">
-    Area:
-  </label>
-  <textarea
-    id="area"
-    name="area"
-    value={formData.area}
-    onChange={handleChange}
-    placeholder="Enter the area for parking"
-    required
-    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
-    rows={4} // Adjust rows as needed
-  />
-</div>
-
-
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
-    </AccordionContent>
-  </AccordionItem>
-
-  <AccordionItem value="item-2" className="border-none no-underline md:w-3/4 w-full" >
-    <AccordionTrigger data-aos="fade-up"  className="w-full md:w-1/2 border border-white text-white hover:bg-white hover:text-indigo-900 py-2 px-4 p-4 text-xl rounded-lg  hover:no-underline no-underline mb-5">
-    I Want to List Parking Space
-    </AccordionTrigger>
-    <AccordionContent>
-    <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200 w-full">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="form-group flex flex-col">
-            <label htmlFor="name" className="text-gray-700 text-left font-semibold mb-1">
-              Name:
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter your name"
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          <div className="form-group flex flex-col">
-            <label htmlFor="contact" className="text-gray-700 text-left font-semibold mb-1">
-              Phone Number:
-            </label>
-            <input
-              type="text"
-              id="contact"
-              name="contact"
-              value={formData.contact}
-              onChange={handleChange}
-              placeholder="Enter your contact details"
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          <div className="form-group flex flex-col">
-  <label htmlFor="area" className="text-gray-700 text-left font-semibold mb-1">
-    Area:
-  </label>
-  <textarea
-    id="area"
-    name="area"
-    value={formData.area}
-    onChange={handleChange}
-    placeholder="Enter the area for parking"
-    required
-    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
-    rows={4} // Adjust rows as needed
-  />
-</div>
-
-
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
-    </AccordionContent>
-  </AccordionItem>
-</Accordion>
-
+          <div data-aos="fade-up" className="p-4 w-full flex flex-col justify-center" >
+            <ParkingForm />
           </div>
           </div>
         </div>
@@ -203,7 +35,7 @@ const Home = () => {
   <div className="max-w-7xl mx-auto px-4">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="md:col-span-1">
-        <div data-aos="slide-right" className="">
+        <div data-aos="fade-up" className="">
         <p className="bg-gray-300  text-black text-left pl-3 pe-3 pt-1 pb-1 mb-2 border inline-flex items-center gap-1 rounded-3xl">
   <GoDotFill />
   Smart Parking Solution
@@ -221,32 +53,48 @@ const Home = () => {
         <div>
       <div
         
-        className="mt-8 border-white border-2 p-[20px]  shadow-gray-50 rounded-xl "
+        className="mt-8 border-white border-2 p-[20px]  shadow-gray-50 rounded-xl hover:bg-slate-950 "
       >
-        <h3 className="text-lime-300 text-xl font-bold mb-3 inline-flex items-center gap-2"> <IoMdPerson/> For Parkers (Users):</h3>
-        <ul data-aos="slide-right" className="list-disc text-white pl-5">
-          <li>Search for available parking spaces in nearby apartments or gated communities.</li>
-          <li>Book monthly parking at affordable rates with secure payment options.</li>
-          <li>Find parking close to your home, saving time and avoiding the stress of street parking.</li>
-        </ul>
+        <h3 className="text-lime-300 text-xl font-bold mb-3 inline-flex items-center gap-2">
+  <IoMdPerson /> For Parkers (Users):
+</h3>
+<ul data-aos="fade-up" className="space-y-2 text-white">
+  <li className="flex items-center gap-2">
+    <FaRegCheckCircle className="text-lime-300" /> Search for available parking spaces in nearby apartments or gated communities.
+  </li>
+  <li className="flex items-center gap-2">
+    <FaRegCheckCircle className="text-lime-300" /> Book monthly parking at affordable rates with secure payment options.
+  </li>
+  <li className="flex items-center gap-2">
+    <FaRegCheckCircle className="text-lime-300" /> Find parking close to your home, saving time and avoiding the stress of street parking.
+  </li>
+</ul>
       </div>
     </div>
 
-        <div  className="mt-8 border-white border-2 p-[20px]  shadow-gray-50 rounded-xl ">
-          <h3 className="text-lime-300 text-lg font-bold mb-3 inline-flex items-center gap-2 "><CiMemoPad/> For Space Owners:</h3>
-          <ul data-aos="slide-right" className="list-disc text-white pl-5">
-            <li>List available parking spaces in your apartment or gated community.</li>
-            <li>Set your pricing and availability to earn passive income.</li>
-            <li>Manage and monitor bookings effortlessly.</li>
-          </ul>
-        </div>
+    <div className="mt-8 border-white border-2 p-[20px] shadow-gray-50 rounded-xl hover:bg-slate-950 ">
+  <h3 className="text-lime-300 text-lg font-bold mb-3 inline-flex items-center gap-2">
+    <CiMemoPad /> For Space Owners:
+  </h3>
+  <ul data-aos="fade-up" className="space-y-2 text-white">
+    <li className="flex items-center gap-2">
+      <FaRegCheckCircle className="text-lime-300" /> List available parking spaces in your apartment or gated community.
+    </li>
+    <li className="flex items-center gap-2">
+      <FaRegCheckCircle className="text-lime-300" /> Set your pricing and availability to earn passive income.
+    </li>
+    <li className="flex items-center gap-2">
+      <FaRegCheckCircle className="text-lime-300" /> Manage and monitor bookings effortlessly.
+    </li>
+  </ul>
+</div>
       </div>
 
       
       <div data-aos="fade-up"  className="text-white flex justify-center items-center md:col-span-1">
   <img 
     src="parking-image.png" 
-    className="p-10 transform transition duration-300 hover:scale-110" 
+    className="p-10 transform transition duration-300 hover:scale-90" 
     alt="Parking"
   />
 </div>
@@ -268,22 +116,22 @@ const Home = () => {
             <div className="space-y-6">
               <div className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                 <div>
-                  <h6  className="text-lg font-bold text-green-600">Search Nearby</h6>
-                  <p  className="text-gray-600">Use the app to find available parking spaces in apartments or gated communities near you.</p>
+                  <h6 data-aos="fade-up" className="text-lg font-bold text-green-600">Search Nearby</h6>
+                  <p data-aos="fade-up" className="text-gray-600">Use the app to find available parking spaces in apartments or gated communities near you.</p>
                 </div>
                 {/* <img src="search-logo.png" alt="Search Nearby Logo" className="w-20 h-auto ml-4" /> */}
               </div>
               <div  className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                 <div>
-                  <h6  className="text-lg font-bold text-green-600">Book Space for Your Car</h6>
-                  <p className="text-gray-600">Select a space that fits your needs and book it for a monthly fee.</p>
+                  <h6 data-aos="fade-up"  className="text-lg font-bold text-green-600">Book Space for Your Car</h6>
+                  <p data-aos="fade-up"  className="text-gray-600">Select a space that fits your needs and book it for a monthly fee.</p>
                 </div>
                 {/* <img src="book-space.png" alt="Book Space Logo" className="w-20 h-auto ml-4" /> */}
               </div>
               <div className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                 <div>
-                  <h6  className="text-lg font-bold text-green-600">Parking</h6>
-                  <p   className="text-gray-600">Enjoy guaranteed, secure parking without the hassle of street parking.</p>
+                  <h6 data-aos="fade-up"   className="text-lg font-bold text-green-600">Parking</h6>
+                  <p data-aos="fade-up"   className="text-gray-600">Enjoy guaranteed, secure parking without the hassle of street parking.</p>
                 </div>
                 {/* <img src="parking-1.jpg" alt="Parking Logo" className="w-20 h-auto ml-4" /> */}
               </div>
@@ -296,22 +144,22 @@ const Home = () => {
             <div className="space-y-6">
               <div className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                 <div>
-                  <h6  className="text-lg font-bold text-green-600">Affordable</h6>
-                  <p   className="text-gray-600">Save money with competitive monthly parking rates, reducing your daily parking expenses.</p>
+                  <h6 data-aos="fade-up" className="text-lg font-bold text-green-600">Affordable</h6>
+                  <p data-aos="fade-up"  className="text-gray-600">Save money with competitive monthly parking rates, reducing your daily parking expenses.</p>
                 </div>
                 {/* <img src="Affordable.jpg" alt="Affordable Logo" className="w-20 h-auto ml-4" /> */}
               </div>
               <div className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                 <div>
-                  <h6  className="text-lg font-bold text-green-600">Stress-Free</h6>
-                  <p   className="text-gray-600">Passive Income: Earn money by listing your unused parking spaces.</p>
+                  <h6 data-aos="fade-up"  className="text-lg font-bold text-green-600">Stress-Free</h6>
+                  <p data-aos="fade-up"  className="text-gray-600">Passive Income: Earn money by listing your unused parking spaces.</p>
                 </div>
                 {/* <img src="stress-free.jpg" alt="Stress-Free Logo" className="w-20 h-auto ml-4" /> */}
               </div>
               <div className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                 <div>
-                  <h6  className="text-lg font-bold text-green-600">Community Focused</h6>
-                  <p   className="text-gray-600">Help your neighbors by providing secure parking options.</p>
+                  <h6 data-aos="fade-up"  className="text-lg font-bold text-green-600">Community Focused</h6>
+                  <p  data-aos="fade-up" className="text-gray-600">Help your neighbors by providing secure parking options.</p>
                 </div>
                 {/* <img src="Community-Focused.jpg" alt="Community Focused Logo" className="w-20 h-auto ml-4" /> */}
               </div>
@@ -322,34 +170,8 @@ const Home = () => {
       </div>
     </section>
     <section className="section-4 mt-12">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="md:text-4xl text-2xl font-bold text-amber-300 ">Loved By Users</h2>
-          <p className="md:mb-8 mb-3 text-white text-xl">Discover what our community has to say about their experience</p>
-          <div className="flex flex-wrap justify-center gap-6">
-            {testimonials.map((testimonial, index) => (
-              <div
-              key={index}
-              className="p-6 bg-gray-100 rounded-lg shadow-md max-w-xs text-center"
-            >
-              <img
-                src={testimonial.image}
-                alt={`${testimonial.name}'s avatar`}
-                className="w-16 h-16 rounded-full mx-auto mb-4"
-              />
-              <h3 className="text-lg font-semibold">{testimonial.name}</h3>
-              
-              {/* Centering Stars */}
-              <p className="text-yellow-500 flex justify-center items-center gap-1 mt-2">
-                {Array.from({ length: testimonial.rating }, (_, i) => (
-                  <FaStar key={i} />
-                ))}
-              </p>
-            
-              <p className="text-gray-600 mt-2">{testimonial.review}</p>
-            </div>
-            
-            ))}
-          </div>
+        <div className="container mx-auto text-center">
+          <Testimonials/>
         </div>
       </section>
       <section className="section-5">
@@ -357,140 +179,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           
           <div className="p-4 w-full flex flex-col justify-center" >
-          <Accordion type="single" collapsible  className="flex flex-col items-center">
-  <AccordionItem data-aos="slide-right" value="item-1" className="border-none md:w-3/4 w-full">
-    <AccordionTrigger className="w-full md:w-1/2 bg-transparent border text-white py-2 px-4 p-4 text-xl rounded-lg hover:bg-[#04AA6D] hover:no-underline no-underline mb-5">
-    I’m Looking for Parking
-    </AccordionTrigger>
-    <AccordionContent className="no-underline">
-      <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200 w-full">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="form-group flex flex-col">
-            <label htmlFor="name" className="text-gray-700 text-left font-semibold mb-1">
-              Name:
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter your name"
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          <div className="form-group flex flex-col">
-            <label htmlFor="contact" className="text-gray-700 text-left font-semibold mb-1">
-              Phone Number:
-            </label>
-            <input
-              type="text"
-              id="contact"
-              name="contact"
-              value={formData.contact}
-              onChange={handleChange}
-              placeholder="Enter your contact details"
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          <div className="form-group flex flex-col">
-  <label htmlFor="area" className="text-gray-700 text-left font-semibold mb-1">
-    Area:
-  </label>
-  <textarea
-    id="area"
-    name="area"
-    value={formData.area}
-    onChange={handleChange}
-    placeholder="Enter the area for parking"
-    required
-    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
-    rows={4} // Adjust rows as needed
-  />
-</div>
-
-
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
-    </AccordionContent>
-  </AccordionItem>
-
-  <AccordionItem value="item-2" className="border-none no-underline md:w-3/4 w-full" >
-    <AccordionTrigger data-aos="slide-right"  className="w-full md:w-1/2  bg-transparent border text-white py-2 px-4 p-4 text-xl rounded-lg hover:bg-[#008CBA] hover:no-underline no-underline mb-5">
-    I Want to List Parking Space
-    </AccordionTrigger>
-    <AccordionContent>
-    <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200 w-full">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="form-group flex flex-col">
-            <label htmlFor="name" className="text-gray-700 text-left font-semibold mb-1">
-              Name:
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter your name"
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          <div className="form-group flex flex-col">
-            <label htmlFor="contact" className="text-gray-700 text-left font-semibold mb-1">
-              Phone Number:
-            </label>
-            <input
-              type="text"
-              id="contact"
-              name="contact"
-              value={formData.contact}
-              onChange={handleChange}
-              placeholder="Enter your contact details"
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          <div className="form-group flex flex-col">
-  <label htmlFor="area" className="text-gray-700 text-left font-semibold mb-1">
-    Area:
-  </label>
-  <textarea
-    id="area"
-    name="area"
-    value={formData.area}
-    onChange={handleChange}
-    placeholder="Enter the area for parking"
-    required
-    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
-    rows={4} // Adjust rows as needed
-  />
-</div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
-    </AccordionContent>
-  </AccordionItem>
-</Accordion>
+          <ParkingForm />
 
           </div>
           <div data-aos="fade-up"  className=" w-full flex flex-col justify-center md:h-[75vh] text-center md:text-left">

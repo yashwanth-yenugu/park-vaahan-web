@@ -1,3 +1,5 @@
+
+import { Link } from "react-router-dom";
 const Header = () => {
   const phoneNumber = "+91 78996 56711";
 
@@ -5,6 +7,7 @@ const Header = () => {
     <div>
       <header className="bg-white p-5 fixed top-0 left-0 w-full z-50">
         <div className="container mx-auto flex justify-between items-center">
+          <Link to="/">
           <div className="flex items-center">
             <img
               className="h-12 w-auto mr-3 cursor-pointer"
@@ -15,6 +18,7 @@ const Header = () => {
               ParkVaahan
             </h1>
           </div>
+          </Link>
           <button className="text-sm md:text-base">
             <a href={`tel:${phoneNumber}`} className="text-[#01A1FF] text-xl font-bold no-underline">
               Call: {phoneNumber}

@@ -1,5 +1,5 @@
 import { FaInstagram, FaFacebook, FaTwitter, FaLinkedin, FaYoutube } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div>
@@ -34,8 +34,9 @@ const Footer = () => {
         <div className="border-t border-gray-300 mt-6 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white">© 2025 ParkVahan. All rights reserved.</p>
           <div className="flex gap-3 text-white">
-            <a href="">Privacy Policy</a>
-            <a href=""> Terms of Service</a>
+            <Link  to="/terms-and-conditions">Terms and Conditions</Link>
+            <Link to="/privacy-policy">Privacy Policy</Link>
+            
          </div>
         </div>
       </div>
