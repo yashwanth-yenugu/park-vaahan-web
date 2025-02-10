@@ -38,26 +38,41 @@ const testimonials: Testimonial[] = [
     role: "Apartment Complex Manager",
     rating: 5,
     review:
-      "Listing my parking space has been a great way to earn extra money every month, and it's been super easy to manage",
-  }
+      "Listing my parking space has been a great way to earn extra money every month, and it's been super easy to manage.",
+  },
+  {
+    image: "user4.jpg",
+    name: "Ananya Sharma",
+    role: "Frequent Traveler",
+    rating: 5,
+    review:
+      "Booking parking in advance has made my airport trips stress-free. Highly recommend this service!",
+  },
+  {
+    image: "user5.jpg",
+    name: "Rahul Verma",
+    role: "Event Organizer",
+    rating: 4,
+    review:
+      "Great for finding parking during busy events. Saves a lot of time and effort!",
+  },
 ];
 
 const Testimonials = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-white to-gray-50">
-      <div className="mx-auto max-w-6xl px-4 sm:px-0"> 
+      <div className="mx-auto max-w-6xl px-4 sm:px-0">
         <div className="max-w-2xl mx-auto text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tight mb-3">Loved by Users</h2>
           <p className="text-muted-foreground">
-            Discover what our community has to say about their experience
+            Discover what our community has to say about their experience.
           </p>
         </div>
 
-       
-        <Carousel className="relative w-full max-w-md mx-auto">
-          <CarouselContent className="flex ml-0 me-0">
+        <Carousel className="relative w-full max-w-5xl mx-auto">
+          <CarouselContent className="flex ml-0 me-0 md:flex-nowrap">
             {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index} className="basis-full px-2">
+              <CarouselItem key={index} className="basis-full md:basis-1/3 px-2">
                 <Card className="bg-gray-500 border-none shadow-md hover:shadow-lg transition-shadow w-full h-64 mx-auto flex flex-col justify-between">
                   <CardContent className="p-6 flex flex-col h-full">
                     <div className="flex items-start space-x-4">
@@ -101,7 +116,6 @@ const Testimonials = () => {
             ))}
           </CarouselContent>
 
-          
           <CarouselPrevious className="absolute left-2 sm:-left-8 top-1/2 transform -translate-y-1/2" />
           <CarouselNext className="absolute right-2 sm:-right-8 top-1/2 transform -translate-y-1/2" />
         </Carousel>

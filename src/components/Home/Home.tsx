@@ -6,13 +6,14 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import ParkingForm from "./ParkingForm";
 import Testimonials from "./Testimonials";
 
+
 const Home = () => {
 
 
 
 
   return (
-    <div className="bg-gradient-to-r from-indigo-900 to-purple-700 py-4">
+    <div className="bg-[#151c2c] py-4">
       <section className="section-1 pt-16 md:py-8">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -24,6 +25,11 @@ const Home = () => {
               Book secure, affordable parking in nearby apartments or gated communities.
               No more searching for parking— just park and go!
               </p>
+              <div className="flex gap-3">
+  <img src="/apple-store.svg" alt="Apple Store" className="w-40 h-16 mt-4 border-2 border-white rounded-xl" />
+  <img src="/play-store.svg" alt="Play Store" className="w-40 h-16 mt-4 border-2 border-white rounded-xl" />
+</div>
+
               </div>
           <div data-aos="fade-up" className="p-4 w-full flex flex-col justify-center" >
             <ParkingForm />
@@ -49,11 +55,12 @@ const Home = () => {
             Whether you’re struggling to find parking in a busy area or need a long-term spot near your home, our app connects you with available spaces in nearby apartments or gated communities. Forget the hassle of street parking—book your monthly parking spot easily and securely today.
           </p>
         </div>
+       
 
         <div>
       <div
         
-        className="mt-8 border-white border-2 p-[20px]  shadow-gray-50 rounded-xl hover:bg-slate-950 "
+        className="mt-8 border-white border-2 p-[20px]  shadow-gray-50 rounded-xl "
       >
         <h3 className="text-lime-300 text-xl font-bold mb-3 inline-flex items-center gap-2">
   <IoMdPerson /> For Parkers (Users):
@@ -72,7 +79,7 @@ const Home = () => {
       </div>
     </div>
 
-    <div className="mt-8 border-white border-2 p-[20px] shadow-gray-50 rounded-xl hover:bg-slate-950 ">
+    <div className="mt-8 border-white border-2 p-[20px] shadow-gray-50 rounded-xl ">
   <h3 className="text-lime-300 text-lg font-bold mb-3 inline-flex items-center gap-2">
     <CiMemoPad /> For Space Owners:
   </h3>
@@ -116,22 +123,22 @@ const Home = () => {
             <div className="space-y-6">
               <div className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                 <div>
-                  <h6 data-aos="fade-up" className="text-lg font-bold text-green-600">Search Nearby</h6>
-                  <p data-aos="fade-up" className="text-gray-600">Use the app to find available parking spaces in apartments or gated communities near you.</p>
+                  <h6  className="text-lg font-bold text-green-600">Search Nearby</h6>
+                  <p className="text-gray-600">Use the app to find available parking spaces in apartments or gated communities near you.</p>
                 </div>
                 {/* <img src="search-logo.png" alt="Search Nearby Logo" className="w-20 h-auto ml-4" /> */}
               </div>
               <div  className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                 <div>
-                  <h6 data-aos="fade-up"  className="text-lg font-bold text-green-600">Book Space for Your Car</h6>
-                  <p data-aos="fade-up"  className="text-gray-600">Select a space that fits your needs and book it for a monthly fee.</p>
+                  <h6  className="text-lg font-bold text-green-600">Book Space for Your Car</h6>
+                  <p   className="text-gray-600">Select a space that fits your needs and book it for a monthly fee.</p>
                 </div>
                 {/* <img src="book-space.png" alt="Book Space Logo" className="w-20 h-auto ml-4" /> */}
               </div>
               <div className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                 <div>
-                  <h6 data-aos="fade-up"   className="text-lg font-bold text-green-600">Parking</h6>
-                  <p data-aos="fade-up"   className="text-gray-600">Enjoy guaranteed, secure parking without the hassle of street parking.</p>
+                  <h6  className="text-lg font-bold text-green-600">Parking</h6>
+                  <p    className="text-gray-600">Enjoy guaranteed, secure parking without the hassle of street parking.</p>
                 </div>
                 {/* <img src="parking-1.jpg" alt="Parking Logo" className="w-20 h-auto ml-4" /> */}
               </div>
@@ -144,22 +151,22 @@ const Home = () => {
             <div className="space-y-6">
               <div className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                 <div>
-                  <h6 data-aos="fade-up" className="text-lg font-bold text-green-600">Affordable</h6>
-                  <p data-aos="fade-up"  className="text-gray-600">Save money with competitive monthly parking rates, reducing your daily parking expenses.</p>
+                  <h6  className="text-lg font-bold text-green-600">Affordable</h6>
+                  <p  className="text-gray-600">Save money with competitive monthly parking rates, reducing your daily parking expenses.</p>
                 </div>
                 {/* <img src="Affordable.jpg" alt="Affordable Logo" className="w-20 h-auto ml-4" /> */}
               </div>
               <div className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                 <div>
-                  <h6 data-aos="fade-up"  className="text-lg font-bold text-green-600">Stress-Free</h6>
-                  <p data-aos="fade-up"  className="text-gray-600">Passive Income: Earn money by listing your unused parking spaces.</p>
+                  <h6   className="text-lg font-bold text-green-600">Stress-Free</h6>
+                  <p   className="text-gray-600">Passive Income: Earn money by listing your unused parking spaces.</p>
                 </div>
                 {/* <img src="stress-free.jpg" alt="Stress-Free Logo" className="w-20 h-auto ml-4" /> */}
               </div>
               <div className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105">
                 <div>
-                  <h6 data-aos="fade-up"  className="text-lg font-bold text-green-600">Community Focused</h6>
-                  <p  data-aos="fade-up" className="text-gray-600">Help your neighbors by providing secure parking options.</p>
+                  <h6  className="text-lg font-bold text-green-600">Community Focused</h6>
+                  <p  className="text-gray-600">Help your neighbors by providing secure parking options.</p>
                 </div>
                 {/* <img src="Community-Focused.jpg" alt="Community Focused Logo" className="w-20 h-auto ml-4" /> */}
               </div>

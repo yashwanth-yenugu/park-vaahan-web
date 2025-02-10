@@ -12,12 +12,16 @@ const Footer = () => {
               <img src="parkvaahan-logo.png" alt="ParkVahan Logo" className="h-14" />
             </a>
             <p className="text-white">Offering India's best parking spots at unbeatable prices.</p>
+            <div className="flex gap-3">
+  <img src="/apple-store.svg" alt="Apple Store" className="bg-black w-40 h-16 mt-4 border-2 border-white rounded-xl" />
+  <img src="/play-store.svg" alt="Play Store" className="bg-black  w-40 h-16 mt-4 border-2 border-white rounded-xl" />
+</div>
             
           </div>
           <div className="w-full md:w-1/4 px-4">
             <h3 className="text-3xl font-bold text-blue-300">Get in Touch</h3>
             <p><a href="mailto:connect@parkvaahan.in" className="text-white">connect@parkvaahan.in</a></p>
-            <p><a href="tel:+917899656711" className="text-white">+91 78996 56711 </a></p>
+            <p><a href="tel:+917899656711" className="text-white">+91 6360480998 </a></p>
             <p className="text-white">Madhapur, Hyderabad, India</p>
             <div className="flex space-x-4 mt-2">
             <a href=""><FaInstagram className="w-6 h-6 text-white" /></a>

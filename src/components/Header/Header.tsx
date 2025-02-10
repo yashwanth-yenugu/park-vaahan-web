@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 const Header = () => {
-  const phoneNumber = "+91 78996 56711";
+  const phoneNumber = "+91 6360480998";
 
   return (
     <div>

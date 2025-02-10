@@ -13,7 +13,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -21,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 
 // Validation Schema using Zod
 const formSchema = z.object({
@@ -35,11 +35,22 @@ const formSchema = z.object({
     .email("Please enter a valid email")
     .optional()
     .or(z.literal("")),
-  city: z.string().min(2, "City must be at least 2 characters"),
+  city: z.string().min(2, "Please select a city"),
   purpose: z.enum(["find", "list"], {
     required_error: "Please select your purpose",
   }),
 });
+
+const metroCities = [
+  "Mumbai",
+  "Delhi",
+  "Bangalore",
+  "Hyderabad",
+  "Chennai",
+  "Kolkata",
+  "Pune",
+  "Ahmedabad",
+];
 
 const ParkingForm = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -146,21 +157,31 @@ const ParkingForm = () => {
                   )}
                 />
 
-                {/* City Field */}
+                {/* City Dropdown */}
                 <FormField
                   control={form.control}
                   name="city"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-gray-700">City</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Enter your city"
-                          autoComplete="off"
-                          {...field}
-                          className="bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-gray-400 transition-colors"
-                        />
-                      </FormControl>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger className="bg-gray-50 border-gray-200 text-gray-900 focus:border-gray-400 transition-colors">
+                            <SelectValue placeholder="Select your city" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="bg-white border-gray-200">
+                          {metroCities.map((city) => (
+                            <SelectItem
+                              key={city}
+                              value={city}
+                              className="text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:text-gray-900 cursor-pointer"
+                            >
+                              {city}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       <FormMessage className="text-red-500" />
                     </FormItem>
                   )}
@@ -172,9 +193,7 @@ const ParkingForm = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-gray-700">
-                        Email (Optional)
-                      </FormLabel>
+                      <FormLabel className="text-gray-700">Email (Optional)</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Enter your email"
@@ -196,28 +215,15 @@ const ParkingForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-gray-700">I want to</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger className="bg-gray-50 border-gray-200 text-gray-900 focus:border-gray-400 transition-colors">
                             <SelectValue placeholder="Select an option" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="bg-white border-gray-200">
-                          <SelectItem
-                            value="find"
-                            className="text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:text-gray-900 cursor-pointer"
-                          >
-                            Find Parking Space
-                          </SelectItem>
-                          <SelectItem
-                            value="list"
-                            className="text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:text-gray-900 cursor-pointer"
-                          >
-                            List My Parking Space
-                          </SelectItem>
+                          <SelectItem value="find">Find Parking Space</SelectItem>
+                          <SelectItem value="list">List My Parking Space</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage className="text-red-500" />
