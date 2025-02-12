@@ -6,6 +6,12 @@ compatibility_date = "2025-01-19"
 [placement]
 mode = "smart"
 
+# Add KV namespace for all environments
+[[kv_namespaces]]
+binding = "NEW_LEAD"
+id = "f69026758a094ab89728768082803d61"
+
+# Keep production specific config
 [[env.production.kv_namespaces]]
 id = "f69026758a094ab89728768082803d61"
 binding = "NEW_LEAD"
