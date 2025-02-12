@@ -6,7 +6,13 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist"] },
+  { 
+    ignores: [
+      "dist/**",
+      ".wrangler/**",
+      "node_modules/**"
+    ]
+  },
   {
     settings: { react: { version: "18.3" } },
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
@@ -15,7 +21,11 @@ export default tseslint.config(
       ecmaVersion: 2020,
       globals: globals.browser,
       parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
+        project: [
+          "./tsconfig.node.json",
+          "./tsconfig.app.json",
+          "./tsconfig.functions.json"
+        ],
         tsconfigRootDir: import.meta.dirname,
       },
     },
