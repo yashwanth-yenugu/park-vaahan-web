@@ -6,22 +6,20 @@ const Features = () => {
       <div className="max-w-7xl mx-auto px-8">
         <div>
           <div className="space-y-6 md:py-16 py-0 text-center">
-              <div className="inline-flex items-center rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-[#80b7f2]">
-                <span className="flex h-2 w-2 rounded-full bg-[#80b7f2] mr-2" />
-                Smart Parking Solution
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold">
-                <span className="text-white">
-                  Your Convenient Solution for{" "}
-                </span>
-                <span className="text-[#80b7f2]">Finding Parking</span>
-              </h2>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                Whether you&apos;re struggling to find parking in a busy area or
-                need a long-term spot near your home, our app connects you with
-                available spaces in nearby apartments or gated communities.
-              </p>
+            <div className="inline-flex items-center rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-[#80b7f2]">
+              <span className="flex h-2 w-2 rounded-full bg-[#80b7f2] mr-2" />
+              Smart Parking Solution
             </div>
+            <h2 className="text-4xl md:text-5xl font-bold">
+              <span className="text-white">Your Convenient Solution for </span>
+              <span className="text-[#80b7f2]">Finding Parking</span>
+            </h2>
+            <p className="text-gray-300 text-lg leading-relaxed">
+              Whether you&apos;re struggling to find parking in a busy area or
+              need a long-term spot near your home, our app connects you with
+              available spaces in nearby apartments or gated communities.
+            </p>
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center max-w-6xl">
           <div className="space-y-10">

@@ -16,14 +16,12 @@ const Header = () => {
           </span>
         </div>
 
-     
         <a
           href={`tel:${CONTACT_INFO.phoneRaw}`}
           className="text-[#80b7f2] text-lg font-semibold hover:text-black transition"
         >
           Call: {CONTACT_INFO.phone}
         </a>
-         
       </div>
     </header>
   );

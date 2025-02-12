@@ -18,7 +18,7 @@ const Hero = () => {
             </p>
             <div className="flex gap-2 mt-8">
               <img src="apple-store.svg" className="h-12" alt="" />
-              <img src="google-play.svg" className="h-12"  alt="" />
+              <img src="google-play.svg" className="h-12" alt="" />
             </div>
           </div>
           <div className="p-4 w-full flex flex-col justify-center">

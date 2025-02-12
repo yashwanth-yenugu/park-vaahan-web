@@ -5,18 +5,17 @@ import ParkingBenefits from "./components/ParkingBenefits";
 import ParkingForm from "./components/ParkingForm";
 import Testimonials from "./components/Testimonials";
 
-
 const Home = () => {
   return (
     <div className="bg-[#151c2c] min-h-screen">
       <Hero />
       <Features />
-      <ParkingBenefits/>
-      <HowItWoks/>
+      <ParkingBenefits />
+      <HowItWoks />
       <section className="md:py-8">
         <div className="max-w-7xl mx-auto px-8 py-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="p-4 w-full flex flex-col justify-center order-2 md:order-none">
+            <div className="p-4 w-full flex flex-col justify-center order-2 md:order-none">
               <ParkingForm />
             </div>
             <div
