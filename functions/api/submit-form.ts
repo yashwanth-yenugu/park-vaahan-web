@@ -3,18 +3,29 @@ type RequestData = {
   name: string;
   phone: string;
   email?: string;
+  city: string;
   purpose: "find" | "list";
 };
 
-// Remove empty interface and use Record<string, never> for empty object type
-type Env = Record<string, never>;
+// Update Env type to include KV binding
+type Env = {
+  NEW_LEAD: KVNamespace;
+};
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
     const data = (await context.request.json()) as RequestData;
 
-    // TODO: Add your form processing logic here
-    console.log("Processing form submission:", data);
+    // Generate a unique key for the KV entry using timestamp and phone
+    const key = `lead_${Date.now()}_${data.phone}`;
+
+    // Store the form data in KV with metadata
+    await context.env.NEW_LEAD.put(key, JSON.stringify(data), {
+      metadata: {
+        timestamp: new Date().toISOString(),
+        source: "web_form",
+      },
+    });
 
     return new Response(
       JSON.stringify({
@@ -31,6 +42,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       }
     );
   } catch (error) {
+    console.error("Form submission error:", error);
     return new Response(
       JSON.stringify({
         success: false,
