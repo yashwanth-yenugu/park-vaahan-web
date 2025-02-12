@@ -15,7 +15,7 @@ function App() {
   }, []);
   return (
     <>
-      <Toaster position="top-center" />
+      <Toaster position="bottom-center" />
       <div>
         <Header></Header>
         <LandingPage></LandingPage>
