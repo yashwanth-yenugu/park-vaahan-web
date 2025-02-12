@@ -40,43 +40,49 @@ const Footer = () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex gap-4">
-            <a
-              href="#"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition-colors"
-            >
-              <svg
-                role="img"
-                viewBox="0 0 24 24"
-                className="w-5 h-5 text-white fill-current"
+          <div className="flex flex-col gap-4">
+            <div className="flex gap-4">
+              <a
+                href="#"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition-colors"
               >
-                <path d={siFacebook.path} />
-              </svg>
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-black transition-colors"
-            >
-              <svg
-                role="img"
-                viewBox="0 0 24 24"
-                className="w-5 h-5 text-white fill-current"
+                <svg
+                  role="img"
+                  viewBox="0 0 24 24"
+                  className="w-5 h-5 text-white fill-current"
+                >
+                  <path d={siFacebook.path} />
+                </svg>
+              </a>
+              <a
+                href="#"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-black transition-colors"
               >
-                <path d={siX.path} />
-              </svg>
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-pink-600 transition-colors"
-            >
-              <svg
-                role="img"
-                viewBox="0 0 24 24"
-                className="w-5 h-5 text-white fill-current"
+                <svg
+                  role="img"
+                  viewBox="0 0 24 24"
+                  className="w-5 h-5 text-white fill-current"
+                >
+                  <path d={siX.path} />
+                </svg>
+              </a>
+              <a
+                href="#"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-pink-600 transition-colors"
               >
-                <path d={siInstagram.path} />
-              </svg>
-            </a>
+                <svg
+                  role="img"
+                  viewBox="0 0 24 24"
+                  className="w-5 h-5 text-white fill-current"
+                >
+                  <path d={siInstagram.path} />
+                </svg>
+              </a>
+            </div>
+            <div className="flex gap-2 mt-8">
+              <img src="apple-store.svg" className="h-10" alt="" />
+              <img src="google-play.svg" className="h-10" alt="" />
+            </div>
           </div>
         </div>
 
