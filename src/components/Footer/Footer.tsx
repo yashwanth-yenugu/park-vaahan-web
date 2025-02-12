@@ -41,7 +41,7 @@ const Footer = () => {
 
           {/* Social Links */}
           <div className="flex flex-col gap-4">
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center">
               <a
                 href="#"
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition-colors"

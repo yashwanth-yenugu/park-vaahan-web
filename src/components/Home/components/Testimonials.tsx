@@ -27,34 +27,18 @@ const testimonials: Testimonial[] = [
   },
   {
     image: "user3.jpg",
-    name: "Pooja Shetty",
+    name: "Neha Negi",
     role: "Daily Commuter",
-    rating: 5,
+    rating: 4,
     review: "Secure and convenient parking options. Love it!",
   },
   {
     image: "user2.jpg",
-    name: "Vijay Kumar",
+    name: "Dheeraj Shetty",
     role: "Apartment Complex Manager",
     rating: 5,
     review:
       "Listing my parking space has been a great way to earn extra money every month, and it's been super easy to manage.",
-  },
-  {
-    image: "user4.jpg",
-    name: "Ananya Sharma",
-    role: "Frequent Traveler",
-    rating: 5,
-    review:
-      "Booking parking in advance has made my airport trips stress-free. Highly recommend this service!",
-  },
-  {
-    image: "user5.jpg",
-    name: "Rahul Verma",
-    role: "Event Organizer",
-    rating: 4,
-    review:
-      "Great for finding parking during busy events. Saves a lot of time and effort!",
   },
 ];
 
