@@ -4,7 +4,7 @@ type RequestData = {
   phone: string;
   email?: string;
   city: string;
-  purpose: "find" | "list";
+  purpose: "findParkingSpace" | "listMyParkingSpace";
 };
 
 // Update Env type to include KV binding

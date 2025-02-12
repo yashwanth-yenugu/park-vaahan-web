@@ -49,7 +49,7 @@ const formSchema = z.object({
     .optional()
     .or(z.literal("")),
   city: z.string().min(1, "City selection is required"),
-  purpose: z.enum(["find", "list"], {
+  purpose: z.enum(["findParkingSpace", "listMyParkingSpace"], {
     required_error: "Please select your purpose",
   }),
 });
@@ -257,10 +257,10 @@ const ParkingForm = () => {
                           <SelectValue placeholder="Select an option" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="find">
+                          <SelectItem value="findParkingSpace">
                             Find Parking Space
                           </SelectItem>
-                          <SelectItem value="list">
+                          <SelectItem value="listMyParkingSpace">
                             List My Parking Space
                           </SelectItem>
                         </SelectContent>
