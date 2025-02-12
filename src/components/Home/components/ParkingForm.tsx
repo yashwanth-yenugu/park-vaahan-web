@@ -22,21 +22,30 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import * as z from "zod";
 
+const metroCities = [
+  "Mumbai",
+  "Delhi",
+  "Bangalore",
+  "Hyderabad",
+  "Chennai",
+  "Kolkata",
+  "Pune",
+  "Ahmedabad",
+];
+
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   phone: z
     .string()
     .min(1, "Phone number is required")
     .refine((val) => /^\d+$/.test(val), "Please enter only numbers")
-    .refine(
-      (val) => val.length === 10,
-      "Phone number must be exactly 10 digits"
-    ),
+    .refine((val) => val.length === 10, "Phone number must be exactly 10 digits"),
   email: z
     .string()
     .email("Please enter a valid email")
     .optional()
     .or(z.literal("")),
+  city: z.string().min(1, "City selection is required"),
   purpose: z.enum(["find", "list"], {
     required_error: "Please select your purpose",
   }),
@@ -52,6 +61,7 @@ const ParkingForm = () => {
       name: "",
       phone: "",
       email: "",
+      city: "",
       purpose: undefined,
     },
   });
@@ -68,16 +78,13 @@ const ParkingForm = () => {
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
     try {
-      // Use the correct API URL based on environment
       const apiUrl = import.meta.env.DEV
-        ? "http://localhost:8788/api/submit-form" // Development
-        : "/api/submit-form"; // Production
+        ? "http://localhost:8788/api/submit-form"
+        : "/api/submit-form";
 
       const response = await fetch(apiUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
@@ -87,7 +94,6 @@ const ParkingForm = () => {
         throw new Error(result.message || "Something went wrong");
       }
 
-      // Handle success
       toast.success("Form submitted successfully!");
       form.reset();
     } catch (error) {
@@ -127,6 +133,7 @@ const ParkingForm = () => {
                 className="space-y-6"
                 autoComplete="off"
               >
+                {/* Name Field */}
                 <FormField
                   control={form.control}
                   name="name"
@@ -146,14 +153,13 @@ const ParkingForm = () => {
                   )}
                 />
 
+                {/* Phone Number Field */}
                 <FormField
                   control={form.control}
                   name="phone"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90">
-                        Phone Number
-                      </FormLabel>
+                      <FormLabel className="text-white/90">Phone Number</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/50 select-none">
@@ -179,14 +185,13 @@ const ParkingForm = () => {
                   )}
                 />
 
+                {/* Email Field */}
                 <FormField
                   control={form.control}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90">
-                        Email (Optional)
-                      </FormLabel>
+                      <FormLabel className="text-white/90">Email (Optional)</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Enter your email"
@@ -201,34 +206,28 @@ const ParkingForm = () => {
                   )}
                 />
 
+                {/* City Dropdown Field */}
                 <FormField
                   control={form.control}
-                  name="purpose"
+                  name="city"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90">I want to</FormLabel>
+                      <FormLabel className="text-white/90">City</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
                           <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-white/30 transition-colors">
-                            <SelectValue placeholder="Select an option" />
+                            <SelectValue placeholder="Select your city" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="bg-gray-900/95 border-white/10">
-                          <SelectItem
-                            value="find"
-                            className="text-white hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer"
-                          >
-                            Find Parking Space
-                          </SelectItem>
-                          <SelectItem
-                            value="list"
-                            className="text-white hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer"
-                          >
-                            List My Parking Space
-                          </SelectItem>
+                        <SelectContent className="bg-white border-white/10">
+                          {metroCities.map((city) => (
+                            <SelectItem key={city} value={city}>
+                              {city}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                       <FormMessage className="text-red-400" />
@@ -236,7 +235,24 @@ const ParkingForm = () => {
                   )}
                 />
 
-                <Button
+                {/* Purpose Dropdown */}
+                <FormField control={form.control} name="purpose" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white/90">I want to</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-white/30 transition-colors">
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="find">Find Parking Space</SelectItem>
+                        <SelectItem value="list">List My Parking Space</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+
+<Button
                   type="submit"
                   className="w-full bg-[#04AA6D] hover:bg-[#038857] text-white font-medium transition-colors duration-200"
                   disabled={isSubmitting}

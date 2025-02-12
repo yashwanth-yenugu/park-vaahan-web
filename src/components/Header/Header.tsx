@@ -2,24 +2,28 @@ import { CONTACT_INFO } from "@/config/constants";
 
 const Header = () => {
   return (
-    <header className="bg-white p-3 fixed top-0 left-0 w-full z-50 shadow-sm">
+    <header className="bg-white p-4 fixed top-0 left-0 w-full z-50 shadow">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center gap-2">
+        {/* Logo & Brand Name */}
+        <div className="flex items-center gap-3">
           <img
-            className="h-7 w-auto"
+            className="h-10 w-auto"
             src="parkvaahan-logo.png"
             alt="ParkVaahan Logo"
           />
-          <span className="text-lg font-semibold text-gray-800">
+          <span className="text-xl font-bold text-[#80b7f2] hidden md:block">
             {CONTACT_INFO.companyName}
           </span>
         </div>
+
+     
         <a
           href={`tel:${CONTACT_INFO.phoneRaw}`}
-          className="text-gray-700 text-sm hover:text-gray-900 transition-colors flex items-center gap-1"
+          className="text-[#80b7f2] text-lg font-semibold hover:text-black transition"
         >
           Call: {CONTACT_INFO.phone}
         </a>
+         
       </div>
     </header>
   );

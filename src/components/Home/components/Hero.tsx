@@ -3,7 +3,7 @@ import ParkingForm from "./ParkingForm";
 const Hero = () => {
   return (
     <section className="section-1 pt-16 md:py-8">
-      <div className="max-w-7xl mx-auto px-4 mt-20">
+      <div className="max-w-7xl mx-auto px-8 mt-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div
             data-aos="fade-up"
@@ -16,6 +16,10 @@ const Hero = () => {
               Book secure, affordable parking in nearby apartments or gated
               communities. No more searching for parking—just park and go!
             </p>
+            <div className="flex gap-2 mt-8">
+              <img src="apple-store.svg" className="h-12" alt="" />
+              <img src="google-play.svg" className="h-12"  alt="" />
+            </div>
           </div>
           <div className="p-4 w-full flex flex-col justify-center">
             <ParkingForm />

@@ -2,11 +2,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Features = () => {
   return (
-    <section className="py-24">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-          <div className="space-y-10">
-            <div className="space-y-6">
+    <section className="">
+      <div className="max-w-7xl mx-auto px-8">
+        <div>
+          <div className="space-y-6 md:py-16 py-0 text-center">
               <div className="inline-flex items-center rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-[#80b7f2]">
                 <span className="flex h-2 w-2 rounded-full bg-[#80b7f2] mr-2" />
                 Smart Parking Solution
@@ -23,7 +22,9 @@ const Features = () => {
                 available spaces in nearby apartments or gated communities.
               </p>
             </div>
-
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center max-w-6xl">
+          <div className="space-y-10">
             <div className="grid gap-8">
               <Card className="bg-white/10 border-white/10 shadow-lg">
                 <CardHeader>
@@ -73,7 +74,7 @@ const Features = () => {
             <div className="absolute -inset-4 bg-[#80b7f2]/20 blur-2xl -z-10 rounded-[32px]" />
             <div className="relative bg-white/10 p-4 rounded-[32px] shadow-2xl border border-white/10">
               <img
-                src="parking-image.png"
+                src="person.jpg"
                 className="w-full h-auto rounded-2xl"
                 alt="Parking Solution"
               />
