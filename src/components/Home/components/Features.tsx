@@ -4,7 +4,7 @@ const Features = () => {
   return (
     <section className="">
       <div className="max-w-7xl mx-auto px-8">
-        <div>
+        <div className="mb-8">
           <div className="space-y-6 md:py-16 py-0 text-center">
             <div className="inline-flex items-center rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-[#80b7f2]">
               <span className="flex h-2 w-2 rounded-full bg-[#80b7f2] mr-2" />

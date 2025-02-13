@@ -1,7 +1,17 @@
+import { Toast, ToastProvider, ToastViewport } from "@/components/ui/toast";
 import { CONTACT_INFO } from "@/config/constants";
+import { Rocket } from "lucide-react";
+import { useState } from "react";
 import { siFacebook, siInstagram, siX } from "simple-icons";
 
 const Footer = () => {
+  const [showToast, setShowToast] = useState(false);
+
+  const handleClick = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000); // Hide toast after 3 seconds
+  };
+
   return (
     <footer className="bg-gray-900 py-12">
       <div className="max-w-7xl mx-auto px-6">
@@ -41,7 +51,7 @@ const Footer = () => {
 
           {/* Social Links */}
           <div className="flex flex-col gap-4">
-            <div className="flex gap-4 justify-center">
+            <div className="flex gap-4 md:justify-end">
               <a
                 href="#"
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition-colors"
@@ -79,10 +89,24 @@ const Footer = () => {
                 </svg>
               </a>
             </div>
-            <div className="flex gap-2 mt-8">
-              <img src="apple-store.svg" className="h-10" alt="" />
-              <img src="google-play.svg" className="h-10" alt="" />
-            </div>
+            <div className="flex justify-center items-center px-8 md:px-0 m-auto">
+  <div className="flex gap-2 mt-8 justify-center">
+    <img
+      src="apple-store.svg"
+      className="h-10 cursor-pointer"
+      alt="Apple Store"
+      onClick={handleClick}
+    />
+    <img
+      src="google-play.svg"
+      className="h-10 cursor-pointer"
+      alt="Google Play"
+      onClick={handleClick}
+    />
+  </div>
+</div>
+
+
           </div>
         </div>
 
@@ -109,6 +133,19 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      {/* Toast Notification */}
+           <ToastProvider>
+  {showToast && (
+    <Toast className="bg-slate-800 justify-center items-center fixed bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col text-center w-[200px] rounded-lg">
+      <div className="text-[#80b7f2] flex items-center">
+        <p className="font-bold me-3">Coming Soon</p>
+        <Rocket className="h-6 w-6 mx-auto mt-2" />
+      </div>
+    </Toast>
+  )}
+  <ToastViewport />
+</ToastProvider>
     </footer>
   );
 };

@@ -110,7 +110,7 @@ const ParkingForm = () => {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto p-6">
+    <div className="w-full max-w-xs sm:max-w-md lg:max-w-md xl:max-w-md mx-auto  md:p-6 mb-7">
       <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-xl shadow-2xl overflow-hidden">
         <div
           className="flex items-center justify-between p-6 cursor-pointer"
