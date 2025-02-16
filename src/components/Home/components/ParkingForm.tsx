@@ -1,5 +1,12 @@
 import { Button } from "@/components/ui/button";
 import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
   Form,
   FormControl,
   FormField,
@@ -15,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronUp } from "lucide-react";
 import { useState } from "react";
@@ -23,11 +31,11 @@ import { toast } from "react-hot-toast";
 import * as z from "zod";
 
 const metroCities = [
-  "Mumbai",
-  "Delhi",
   "Bangalore",
   "Hyderabad",
   "Chennai",
+  "Mumbai",
+  "Delhi",
   "Kolkata",
   "Pune",
   "Ahmedabad",
@@ -49,24 +57,24 @@ const formSchema = z.object({
     .optional()
     .or(z.literal("")),
   city: z.string().min(1, "City selection is required"),
-  purpose: z.enum(["findParkingSpace", "listMyParkingSpace"], {
-    required_error: "Please select your purpose",
-  }),
+  purpose: z.string().min(1, "Please select your purpose"),
 });
 
 const ParkingForm = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const defaultValues = {
+    name: "",
+    phone: "",
+    email: "",
+    city: "",
+    purpose: "",
+  };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      phone: "",
-      email: "",
-      city: "",
-      purpose: undefined,
-    },
+    defaultValues,
   });
 
   const handlePhoneInput = (
@@ -110,45 +118,58 @@ const ParkingForm = () => {
   };
 
   return (
-    <div className="w-full max-w-xs sm:max-w-md lg:max-w-md xl:max-w-md mx-auto  md:p-6 mb-7">
-      <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-xl shadow-2xl overflow-hidden">
-        <div
-          className="flex items-center justify-between p-6 cursor-pointer"
+    <div className="w-full max-w-md mx-auto px-4 md:px-0 pb-8 md:pb-0">
+      <Card className="backdrop-blur-xl bg-white/5 border-white/10 shadow-2xl">
+        <CardHeader
+          className="space-y-1 cursor-pointer select-none"
           onClick={() => setIsExpanded(!isExpanded)}
         >
-          <h2 className="text-2xl font-semibold text-white">Get Started</h2>
-          <ChevronUp
-            className={`text-white transition-transform duration-200 ${
-              isExpanded ? "" : "rotate-180"
-            }`}
-          />
-        </div>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-2xl font-bold">
+              <span className="text-white">Get </span>
+              <span className="text-[#80b7f2]">Started</span>
+            </CardTitle>
+            <ChevronUp
+              className={cn(
+                "text-[#80b7f2] transition-all duration-300",
+                !isExpanded && "rotate-180"
+              )}
+            />
+          </div>
+          <CardDescription className="text-gray-300">
+            Fill out the form below and we&apos;ll get back to you
+          </CardDescription>
+        </CardHeader>
 
         <div
-          className={`transition-all duration-300 ease-in-out ${
-            isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
-          }`}
+          className={cn(
+            "transition-all duration-500 ease-in-out",
+            isExpanded
+              ? "max-h-[1000px] opacity-100"
+              : "max-h-0 opacity-0 overflow-hidden"
+          )}
         >
-          <div className="px-6 pb-6">
+          <CardContent>
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6"
+                className="space-y-4 mt-2"
                 autoComplete="off"
               >
-                {/* Name Field */}
                 <FormField
                   control={form.control}
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90">Name</FormLabel>
+                      <FormLabel className="text-[#80b7f2] font-medium">
+                        Name
+                      </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Enter your name"
                           autoComplete="off"
                           {...field}
-                          className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-white/30 transition-colors"
+                          className="bg-white/5 border-white/10 text-gray-300 placeholder:text-gray-300/30 focus:border-[#80b7f2]/50 transition-all hover:bg-white/10"
                         />
                       </FormControl>
                       <FormMessage className="text-red-400" />
@@ -156,18 +177,17 @@ const ParkingForm = () => {
                   )}
                 />
 
-                {/* Phone Number Field */}
                 <FormField
                   control={form.control}
                   name="phone"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90">
+                      <FormLabel className="text-[#80b7f2] font-medium">
                         Phone Number
                       </FormLabel>
                       <FormControl>
-                        <div className="relative">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/50 select-none">
+                        <div className="relative group">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300/50 select-none group-hover:text-gray-300/70 transition-colors">
                             +91
                           </span>
                           <Input
@@ -181,7 +201,7 @@ const ParkingForm = () => {
                               handlePhoneInput(e, field.onChange)
                             }
                             value={field.value}
-                            className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-white/30 transition-colors pl-12"
+                            className="bg-white/5 border-white/10 text-gray-300 placeholder:text-gray-300/30 focus:border-[#80b7f2]/50 transition-all hover:bg-white/10 pl-12"
                           />
                         </div>
                       </FormControl>
@@ -190,14 +210,14 @@ const ParkingForm = () => {
                   )}
                 />
 
-                {/* Email Field */}
                 <FormField
                   control={form.control}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90">
-                        Email (Optional)
+                      <FormLabel className="text-[#80b7f2] font-medium">
+                        Email{" "}
+                        <span className="text-gray-300/50">(Optional)</span>
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -205,7 +225,7 @@ const ParkingForm = () => {
                           autoComplete="off"
                           required={false}
                           {...field}
-                          className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-white/30 transition-colors"
+                          className="bg-white/5 border-white/10 text-gray-300 placeholder:text-gray-300/30 focus:border-[#80b7f2]/50 transition-all hover:bg-white/10"
                         />
                       </FormControl>
                       <FormMessage className="text-red-400" />
@@ -213,25 +233,30 @@ const ParkingForm = () => {
                   )}
                 />
 
-                {/* City Dropdown Field */}
                 <FormField
                   control={form.control}
                   name="city"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90">City</FormLabel>
+                      <FormLabel className="text-[#80b7f2] font-medium">
+                        City
+                      </FormLabel>
                       <Select
                         onValueChange={field.onChange}
-                        defaultValue={field.value}
+                        value={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-white/30 transition-colors">
+                          <SelectTrigger className="bg-white/5 border-white/10 text-gray-300 focus:border-[#80b7f2]/50 transition-all hover:bg-white/10">
                             <SelectValue placeholder="Select your city" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="bg-white border-white/10">
+                        <SelectContent className="bg-[#151c2c]/95 border-white/10 backdrop-blur-xl">
                           {metroCities.map((city) => (
-                            <SelectItem key={city} value={city}>
+                            <SelectItem
+                              key={city}
+                              value={city}
+                              className="text-gray-300 focus:bg-white/10 focus:text-[#80b7f2] data-[highlighted]:bg-white/10"
+                            >
                               {city}
                             </SelectItem>
                           ))}
@@ -242,46 +267,62 @@ const ParkingForm = () => {
                   )}
                 />
 
-                {/* Purpose Dropdown */}
                 <FormField
                   control={form.control}
                   name="purpose"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90">I want to</FormLabel>
+                      <FormLabel className="text-[#80b7f2] font-medium">
+                        I want to
+                      </FormLabel>
                       <Select
                         onValueChange={field.onChange}
-                        defaultValue={field.value}
+                        value={field.value}
                       >
-                        <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-white/30 transition-colors">
-                          <SelectValue placeholder="Select an option" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="findParkingSpace">
+                        <FormControl>
+                          <SelectTrigger className="bg-white/5 border-white/10 text-gray-300 focus:border-[#80b7f2]/50 transition-all hover:bg-white/10">
+                            <SelectValue placeholder="Select an option" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="bg-[#151c2c]/95 border-white/10 backdrop-blur-xl">
+                          <SelectItem
+                            value="findParkingSpace"
+                            className="text-gray-300 focus:bg-white/10 focus:text-[#80b7f2] data-[highlighted]:bg-white/10"
+                          >
                             Find Parking Space
                           </SelectItem>
-                          <SelectItem value="listMyParkingSpace">
+                          <SelectItem
+                            value="listMyParkingSpace"
+                            className="text-gray-300 focus:bg-white/10 focus:text-[#80b7f2] data-[highlighted]:bg-white/10"
+                          >
                             List My Parking Space
                           </SelectItem>
                         </SelectContent>
                       </Select>
-                      <FormMessage />
+                      <FormMessage className="text-red-400" />
                     </FormItem>
                   )}
                 />
 
                 <Button
                   type="submit"
-                  className="w-full bg-[#04AA6D] hover:bg-[#038857] text-white font-medium transition-colors duration-200"
+                  className="w-full bg-[#80b7f2] hover:bg-[#80b7f2]/80 text-white font-medium transition-all duration-200 mt-6 hover:shadow-lg hover:shadow-[#80b7f2]/20"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Submitting..." : "Get in Touch"}
+                  {isSubmitting ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Submitting...
+                    </div>
+                  ) : (
+                    "Submit"
+                  )}
                 </Button>
               </form>
             </Form>
-          </div>
+          </CardContent>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };
