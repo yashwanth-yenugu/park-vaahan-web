@@ -118,7 +118,7 @@ const ParkingForm = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto px-4 md:px-0 pb-8 md:pb-0">
+    <div className="w-full max-w-[95%] sm:max-w-md mx-auto px-0 md:px-0 pb-8 md:pb-0">
       <Card className="backdrop-blur-xl bg-white/5 border-white/10 shadow-2xl">
         <CardHeader
           className="space-y-1 cursor-pointer select-none"
