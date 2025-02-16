@@ -1,7 +1,7 @@
 {
   "name": "ParkVaahan",
   "short_name": "ParkVaahan",
-  "description": "Find free parking spaces in gated communities across Bangalore and Hyderabad",
+  "description": "Find parking spaces in gated communities across Bangalore and Hyderabad",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
