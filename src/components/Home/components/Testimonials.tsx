@@ -44,25 +44,30 @@ const testimonials: Testimonial[] = [
 
 const Testimonials = () => {
   return (
-    <section className="py-16 bg-stone-100">
+    <section className="py-8">
       <div className="mx-auto max-w-6xl px-4 sm:px-0">
-        <div className="max-w-2xl mx-auto text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tight mb-3">
-            Loved by Users
+        <div className="space-y-6 text-center mb-12">
+          <div className="inline-flex items-center rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-[#80b7f2]">
+            <span className="flex h-2 w-2 rounded-full bg-[#80b7f2] mr-2" />
+            User Reviews
+          </div>
+          <h2 className="text-4xl font-bold">
+            <span className="text-white">Trusted by Our </span>
+            <span className="text-[#80b7f2]">Community</span>
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-gray-300 text-lg leading-relaxed">
             Discover what our community has to say about their experience.
           </p>
         </div>
 
-        <Carousel className="relative w-full max-w-5xl mx-auto  ">
+        <Carousel className="relative w-full max-w-5xl mx-auto">
           <CarouselContent className="flex ml-0 me-0 md:flex-nowrap">
             {testimonials.map((testimonial, index) => (
               <CarouselItem
                 key={index}
-                className="basis-full md:basis-1/3 px-2 shadow-sm  shadow-gray p-5"
+                className="basis-full md:basis-1/3 px-2"
               >
-                <Card className="bg-white border-none shadow-md hover:shadow-lg transition-shadow w-full h-64 mx-auto flex flex-col justify-between">
+                <Card className="bg-white/10 border-white/10 shadow-lg hover:shadow-xl transition-shadow w-full h-64 mx-auto flex flex-col justify-between">
                   <CardContent className="p-6 flex flex-col h-full">
                     <div className="flex items-start space-x-4">
                       <Avatar className="h-12 w-12">
@@ -78,10 +83,10 @@ const Testimonials = () => {
                         </AvatarFallback>
                       </Avatar>
                       <div>
-                        <h3 className="font-semibold text-left text-black">
+                        <h3 className="font-semibold text-left text-[#80b7f2]">
                           {testimonial.name}
                         </h3>
-                        <p className="text-black text-left text-sm text-muted-foreground">
+                        <p className="text-gray-300 text-left text-sm">
                           {testimonial.role}
                         </p>
                       </div>
@@ -93,7 +98,7 @@ const Testimonials = () => {
                           (_, i) => (
                             <svg
                               key={i}
-                              className="w-4 h-4 fill-yellow-400"
+                              className="w-4 h-4 fill-[#80b7f2]"
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 24 24"
                             >
@@ -102,7 +107,7 @@ const Testimonials = () => {
                           )
                         )}
                       </div>
-                      <p className="text-black text-sm text-muted-foreground leading-relaxed flex-grow">
+                      <p className="text-gray-300 text-sm leading-relaxed flex-grow">
                         &ldquo;{testimonial.review}&rdquo;
                       </p>
                     </div>

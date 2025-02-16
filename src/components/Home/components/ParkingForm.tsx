@@ -125,17 +125,18 @@ const ParkingForm = () => {
           onClick={() => setIsExpanded(!isExpanded)}
         >
           <div className="flex items-center justify-between">
-            <CardTitle className="text-2xl font-bold bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
-              Contact Us
+            <CardTitle className="text-2xl font-bold">
+              <span className="text-white">Get </span>
+              <span className="text-[#80b7f2]">Started</span>
             </CardTitle>
             <ChevronUp
               className={cn(
-                "text-white/70 transition-all duration-300",
+                "text-[#80b7f2] transition-all duration-300",
                 !isExpanded && "rotate-180"
               )}
             />
           </div>
-          <CardDescription className="text-white/60">
+          <CardDescription className="text-gray-300">
             Fill out the form below and we&apos;ll get back to you
           </CardDescription>
         </CardHeader>
@@ -160,7 +161,7 @@ const ParkingForm = () => {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90 font-medium">
+                      <FormLabel className="text-[#80b7f2] font-medium">
                         Name
                       </FormLabel>
                       <FormControl>
@@ -168,7 +169,7 @@ const ParkingForm = () => {
                           placeholder="Enter your name"
                           autoComplete="off"
                           {...field}
-                          className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-white/30 transition-all hover:bg-white/10"
+                          className="bg-white/5 border-white/10 text-gray-300 placeholder:text-gray-300/30 focus:border-[#80b7f2]/50 transition-all hover:bg-white/10"
                         />
                       </FormControl>
                       <FormMessage className="text-red-400" />
@@ -181,12 +182,12 @@ const ParkingForm = () => {
                   name="phone"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90 font-medium">
+                      <FormLabel className="text-[#80b7f2] font-medium">
                         Phone Number
                       </FormLabel>
                       <FormControl>
                         <div className="relative group">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/50 select-none group-hover:text-white/70 transition-colors">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300/50 select-none group-hover:text-gray-300/70 transition-colors">
                             +91
                           </span>
                           <Input
@@ -200,7 +201,7 @@ const ParkingForm = () => {
                               handlePhoneInput(e, field.onChange)
                             }
                             value={field.value}
-                            className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-white/30 transition-all hover:bg-white/10 pl-12"
+                            className="bg-white/5 border-white/10 text-gray-300 placeholder:text-gray-300/30 focus:border-[#80b7f2]/50 transition-all hover:bg-white/10 pl-12"
                           />
                         </div>
                       </FormControl>
@@ -214,8 +215,9 @@ const ParkingForm = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90 font-medium">
-                        Email <span className="text-white/50">(Optional)</span>
+                      <FormLabel className="text-[#80b7f2] font-medium">
+                        Email{" "}
+                        <span className="text-gray-300/50">(Optional)</span>
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -223,7 +225,7 @@ const ParkingForm = () => {
                           autoComplete="off"
                           required={false}
                           {...field}
-                          className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-white/30 transition-all hover:bg-white/10"
+                          className="bg-white/5 border-white/10 text-gray-300 placeholder:text-gray-300/30 focus:border-[#80b7f2]/50 transition-all hover:bg-white/10"
                         />
                       </FormControl>
                       <FormMessage className="text-red-400" />
@@ -236,7 +238,7 @@ const ParkingForm = () => {
                   name="city"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90 font-medium">
+                      <FormLabel className="text-[#80b7f2] font-medium">
                         City
                       </FormLabel>
                       <Select
@@ -244,16 +246,16 @@ const ParkingForm = () => {
                         value={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-white/30 transition-all hover:bg-white/10">
+                          <SelectTrigger className="bg-white/5 border-white/10 text-gray-300 focus:border-[#80b7f2]/50 transition-all hover:bg-white/10">
                             <SelectValue placeholder="Select your city" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="bg-gray-900/95 border-white/10 backdrop-blur-xl">
+                        <SelectContent className="bg-[#151c2c]/95 border-white/10 backdrop-blur-xl">
                           {metroCities.map((city) => (
                             <SelectItem
                               key={city}
                               value={city}
-                              className="text-white/90 focus:bg-white/10 focus:text-white data-[highlighted]:bg-white/10"
+                              className="text-gray-300 focus:bg-white/10 focus:text-[#80b7f2] data-[highlighted]:bg-white/10"
                             >
                               {city}
                             </SelectItem>
@@ -270,7 +272,7 @@ const ParkingForm = () => {
                   name="purpose"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90 font-medium">
+                      <FormLabel className="text-[#80b7f2] font-medium">
                         I want to
                       </FormLabel>
                       <Select
@@ -278,20 +280,20 @@ const ParkingForm = () => {
                         value={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-white/30 transition-all hover:bg-white/10">
+                          <SelectTrigger className="bg-white/5 border-white/10 text-gray-300 focus:border-[#80b7f2]/50 transition-all hover:bg-white/10">
                             <SelectValue placeholder="Select an option" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="bg-gray-900/95 border-white/10 backdrop-blur-xl">
+                        <SelectContent className="bg-[#151c2c]/95 border-white/10 backdrop-blur-xl">
                           <SelectItem
                             value="findParkingSpace"
-                            className="text-white/90 focus:bg-white/10 focus:text-white data-[highlighted]:bg-white/10"
+                            className="text-gray-300 focus:bg-white/10 focus:text-[#80b7f2] data-[highlighted]:bg-white/10"
                           >
                             Find Parking Space
                           </SelectItem>
                           <SelectItem
                             value="listMyParkingSpace"
-                            className="text-white/90 focus:bg-white/10 focus:text-white data-[highlighted]:bg-white/10"
+                            className="text-gray-300 focus:bg-white/10 focus:text-[#80b7f2] data-[highlighted]:bg-white/10"
                           >
                             List My Parking Space
                           </SelectItem>
@@ -304,7 +306,7 @@ const ParkingForm = () => {
 
                 <Button
                   type="submit"
-                  className="w-full bg-[#04AA6D] hover:bg-[#038857] text-white font-medium transition-all duration-200 mt-6 hover:shadow-lg hover:shadow-[#04AA6D]/20"
+                  className="w-full bg-[#80b7f2] hover:bg-[#80b7f2]/80 text-white font-medium transition-all duration-200 mt-6 hover:shadow-lg hover:shadow-[#80b7f2]/20"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
